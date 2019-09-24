@@ -1,0 +1,22 @@
+{
+  "name": "graphql-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon --exec ts-node index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.12",
+    "apollo-server": "^2.9.3",
+    "apollo-server-express": "^2.9.3",
+    "graphql-import": "^0.7.1",
+    "graphql-tag": "^2.10.1",
+    "nodemon": "^1.19.2",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  }
+}

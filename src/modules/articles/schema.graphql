@@ -1,0 +1,13 @@
+type Article {
+  title: String!
+  content: String!
+}
+type Link {
+  id: ID!
+  description: String!
+  url: String!
+}
+type Mutation {
+  publishArticle(title: String, content: String): Article
+  post(url: String!, description: String!): Link!
+}
