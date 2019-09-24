@@ -1,22 +1,10 @@
 import { GraphQLModule } from "@graphql-modules/core";
-import gql from "graphql-tag";
+import { importSchema } from "graphql-import";
+import { join } from "path";
+import { resolvers } from "./resolvers";
 
 export const commonModule = new GraphQLModule({
   name: "common",
-  typeDefs: gql`
-    type Query {
-      serverTime: Common
-    }
-
-    type Common {
-      message: String
-    }
-  `,
-  resolvers: {
-    Query: {
-      serverTime: () => {
-        console.log("Hello World");
-      }
-    }
-  }
+  typeDefs: importSchema(join(__dirname, "schema.graphql")),
+  resolvers
 });
