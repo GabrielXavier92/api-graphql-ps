@@ -21,26 +21,23 @@ declare namespace GQL {
   }
 
   interface IQuery {
-    __typename: "Query";
-    me: IUser | null;
+    __typename: 'Query';
+    me: string | null;
     serverTime: ICommon | null;
   }
 
-  interface IUser {
-    __typename: "User";
-    id: string;
-    username: string;
-  }
-
   interface ICommon {
-    __typename: "Common";
+    __typename: 'Common';
     message: string | null;
   }
 
   interface IMutation {
-    __typename: "Mutation";
+    __typename: 'Mutation';
     publishArticle: IArticle | null;
     post: ILink;
+    register: Array<IMessage> | null;
+    login: Array<IMessage> | null;
+    forgotPassword: Array<IMessage> | null;
   }
 
   interface IPublishArticleOnMutationArguments {
@@ -53,17 +50,39 @@ declare namespace GQL {
     description: string;
   }
 
+  interface IRegisterOnMutationArguments {
+    email: string;
+    name: string;
+    password: string;
+  }
+
+  interface ILoginOnMutationArguments {
+    email: string;
+    password: string;
+  }
+
+  interface IForgotPasswordOnMutationArguments {
+    email: string;
+  }
+
   interface IArticle {
-    __typename: "Article";
+    __typename: 'Article';
     title: string;
     content: string;
   }
 
   interface ILink {
-    __typename: "Link";
+    __typename: 'Link';
     id: string;
     description: string;
     url: string;
+  }
+
+  interface IMessage {
+    __typename: 'Message';
+    path: string;
+    message: string;
+    statusCode: number | null;
   }
 }
 
