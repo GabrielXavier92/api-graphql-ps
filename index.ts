@@ -10,11 +10,16 @@ import { authModule } from "./src/modules/auth/auth-module";
 import { articlesModule } from "./src/modules/articles/articles-module";
 import { createConnection } from "./src/utils/create-connection";
 
+import { Request } from "express";
+
 const startServer = async () => {
 	const app = new GraphQLModule({
 		name: "app",
 		imports: [commonModule, authModule, articlesModule],
-		resolversComposition
+		resolversComposition,
+		context(req: Request) {
+			return req;
+		}
 	});
 
 	const { schema, context } = app;

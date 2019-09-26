@@ -6,6 +6,10 @@ type Query {
 
 type Mutation {
 	register(email: String!, name: String!, password: String!): [Message!]
-	login(email: String!, password: String!): [Message!]
+	login(email: String!, password: String!): Login
 	forgotPassword(email: String!): [Message!]
+}
+
+type Login {
+	token: String
 }
