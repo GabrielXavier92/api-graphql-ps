@@ -1,4 +1,5 @@
 import { User } from "../../../entity/User";
+import { ForbiddenError } from "apollo-server";
 import {
 	duplicatedEmail,
 	minLengthName,
@@ -32,7 +33,7 @@ export const register = async ({ email, name, password }: GQL.IRegisterOnMutatio
 	try {
 		await schema.validate({ email, name, password }, { abortEarly: false });
 	} catch (err) {
-		return formatYupError(err);
+		formatYupError(err);
 	}
 
 	const userExists = await User.findOne({
@@ -40,15 +41,7 @@ export const register = async ({ email, name, password }: GQL.IRegisterOnMutatio
 		select: ["id"]
 	});
 
-	if (userExists) {
-		return [
-			{
-				path: "email",
-				message: duplicatedEmail,
-				statusCode: 400
-			}
-		];
-	}
+	if (userExists) throw new ForbiddenError(duplicatedEmail);
 
 	const hashPassword = await bcrypt.hash(password, 10);
 
@@ -63,11 +56,5 @@ export const register = async ({ email, name, password }: GQL.IRegisterOnMutatio
 	// Gerar uma URL para confirmacao de email
 	// await sendEmail(email, "url");
 
-	return [
-		{
-			path: "user",
-			message: `Created user ${name}`,
-			statusCode: 201
-		}
-	];
+	return user;
 };

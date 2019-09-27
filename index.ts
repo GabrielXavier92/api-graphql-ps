@@ -26,7 +26,13 @@ const startServer = async () => {
 
 	const server = new ApolloServer({
 		schema,
-		context
+		context,
+		formatError: ({ message, path, extensions }) => ({
+			message,
+			path,
+			errors: extensions!.exception!.errors,
+			code: extensions!.code
+		})
 	});
 
 	await createConnection();

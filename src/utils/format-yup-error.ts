@@ -1,14 +1,15 @@
 import { ValidationError } from "yup";
+import { UserInputError } from "apollo-server";
 
 export const formatYupError = (err: ValidationError) => {
-	const errors: Array<{ path: string; message: string; statusCode: number }> = [];
+	const errors: Array<{ path: string; message: string }> = [];
+
 	err.inner.forEach(e => {
 		errors.push({
 			path: e.path,
-			message: e.message,
-			statusCode: 400
+			message: e.message
 		});
 	});
 
-	return errors;
+	throw new UserInputError("Validations error", { errors });
 };

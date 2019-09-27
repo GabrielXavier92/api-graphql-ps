@@ -35,9 +35,10 @@ declare namespace GQL {
     __typename: 'Mutation';
     publishArticle: IArticle | null;
     post: ILink;
-    register: Array<IMessage> | null;
-    login: Array<IMessage> | null;
-    forgotPassword: Array<IMessage> | null;
+    register: IUser | null;
+    login: ILogin | null;
+    forgotPassword: boolean | null;
+    changePassword: boolean | null;
   }
 
   interface IPublishArticleOnMutationArguments {
@@ -65,6 +66,12 @@ declare namespace GQL {
     email: string;
   }
 
+  interface IChangePasswordOnMutationArguments {
+    email: string;
+    password: string;
+    newPassword: string;
+  }
+
   interface IArticle {
     __typename: 'Article';
     title: string;
@@ -78,11 +85,18 @@ declare namespace GQL {
     url: string;
   }
 
-  interface IMessage {
-    __typename: 'Message';
-    path: string;
-    message: string;
-    statusCode: number | null;
+  interface IUser {
+    __typename: 'User';
+    id: string;
+    name: string | null;
+    email: string | null;
+    createdAt: string | null;
+    updatedAt: string | null;
+  }
+
+  interface ILogin {
+    __typename: 'Login';
+    token: string | null;
   }
 }
 

@@ -1,15 +1,22 @@
-# import Message from "../shared.graphql"
-
 type Query {
 	me: String
 }
 
 type Mutation {
-	register(email: String!, name: String!, password: String!): [Message!]
+	register(email: String!, name: String!, password: String!): User
 	login(email: String!, password: String!): Login
-	forgotPassword(email: String!): [Message!]
+	forgotPassword(email: String!): Boolean
+	changePassword(email: String!, password: String!, newPassword: String!): Boolean
 }
 
 type Login {
 	token: String
+}
+
+type User {
+	id: ID!
+	name: String
+	email: String
+	createdAt: String
+	updatedAt: String
 }

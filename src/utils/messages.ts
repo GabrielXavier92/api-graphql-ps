@@ -7,3 +7,4 @@ export const minLengthPassword = "Password must be at least 5 characters";
 export const failedToLogin = "Failed to login";
 export const confirmedUser = "Please, confirm you email before start";
 export const welcomeMessage = "Welcome ";
+export const failedToChangePassword = "Canot change password";
