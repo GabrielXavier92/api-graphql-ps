@@ -1,4 +1,8 @@
+import { Handbook } from "./Handbook";
 import { Doctor } from "./Doctor";
+import { Patient } from "./Patient";
+import { Specialty } from "./Specialty";
+import { Service } from "./Service";
 
 import {
 	Entity,
@@ -11,6 +15,8 @@ import {
 	OneToMany
 } from "typeorm";
 import * as uuidv4 from "uuid/v4";
+import { Guide } from "./Guide";
+import { Schedule } from "./Schedule";
 
 @Entity("user")
 export class User extends BaseEntity {
@@ -40,8 +46,26 @@ export class User extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt: Date;
 
+	@OneToMany(_ => Patient, patient => patient.user)
+	patients: Patient[];
+
 	@OneToMany(_ => Doctor, doctor => doctor.user)
 	doctors: Doctor[];
+
+	@OneToMany(_ => Specialty, specialty => specialty.user)
+	specialtys: Specialty[];
+
+	@OneToMany(_ => Service, service => service.user)
+	services: Service[];
+
+	@OneToMany(_ => Handbook, handbook => handbook.user)
+	handbooks: Handbook[];
+
+	@OneToMany(_ => Guide, guide => guide.user)
+	guides: Guide[];
+
+	@OneToMany(_ => Schedule, schedule => schedule.user)
+	schedules: Schedule[];
 
 	@BeforeInsert()
 	addId() {

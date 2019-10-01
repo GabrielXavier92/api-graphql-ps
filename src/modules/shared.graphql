@@ -1,5 +1,0 @@
-type Message {
-	path: String!
-	message: String!
-	statusCode: Int
-}

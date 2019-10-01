@@ -23,32 +23,50 @@ declare namespace GQL {
   interface IQuery {
     __typename: 'Query';
     me: string | null;
-    serverTime: ICommon | null;
+    fetchDoctors: Array<IDoctor | null> | null;
+    fetchDoctor: IDoctor | null;
   }
 
-  interface ICommon {
-    __typename: 'Common';
-    message: string | null;
+  interface IFetchDoctorOnQueryArguments {
+    id: string;
+  }
+
+  interface IDoctor {
+    __typename: 'Doctor';
+    id: string;
+    name: string;
+    birth: string | null;
+    cro: number | null;
+    status: boolean | null;
+    gender: string | null;
+    doctorSpecialties: Array<ISpecialty | null> | null;
+  }
+
+  interface ISpecialty {
+    __typename: 'Specialty';
+    id: string;
+    code: number | null;
+    name: string | null;
+    description: string | null;
+    value: number | null;
   }
 
   interface IMutation {
     __typename: 'Mutation';
     publishArticle: IArticle | null;
-    post: ILink;
     register: IUser | null;
     login: ILogin | null;
     forgotPassword: boolean | null;
     changePassword: boolean | null;
+    createDoctor: IDoctor | null;
+    updateDoctor: IDoctor | null;
+    deleteDoctor: boolean | null;
+    createSpecialty: ISpecialty | null;
   }
 
   interface IPublishArticleOnMutationArguments {
     title?: string | null;
     content?: string | null;
-  }
-
-  interface IPostOnMutationArguments {
-    url: string;
-    description: string;
   }
 
   interface IRegisterOnMutationArguments {
@@ -72,17 +90,26 @@ declare namespace GQL {
     newPassword: string;
   }
 
+  interface ICreateDoctorOnMutationArguments {
+    doctor: IDoctorInput;
+  }
+
+  interface IUpdateDoctorOnMutationArguments {
+    doctor: IDoctorInput;
+  }
+
+  interface IDeleteDoctorOnMutationArguments {
+    id: string;
+  }
+
+  interface ICreateSpecialtyOnMutationArguments {
+    specialty: ISpecialtyInput;
+  }
+
   interface IArticle {
     __typename: 'Article';
     title: string;
     content: string;
-  }
-
-  interface ILink {
-    __typename: 'Link';
-    id: string;
-    description: string;
-    url: string;
   }
 
   interface IUser {
@@ -97,6 +124,30 @@ declare namespace GQL {
   interface ILogin {
     __typename: 'Login';
     token: string | null;
+  }
+
+  interface IDoctorInput {
+    id?: string | null;
+    name: string;
+    gender?: string | null;
+    birth?: string | null;
+    cro?: number | null;
+    status?: boolean | null;
+    specialties?: Array<string | null> | null;
+  }
+
+  interface ISpecialtyInput {
+    code: number;
+    name?: string | null;
+    description?: string | null;
+    value?: number | null;
+  }
+
+  interface ILink {
+    __typename: 'Link';
+    id: string;
+    description: string;
+    url: string;
   }
 }
 

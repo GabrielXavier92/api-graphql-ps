@@ -43,7 +43,9 @@ export const login = async ({ email, password }: GQL.ILoginOnMutationArguments) 
 	// Compara as senhas
 	if (!(await bcrypt.compare(password, user.password))) throw new ForbiddenError(failedToLogin);
 
-	const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string);
+	const token = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_SECRET as string, {
+		expiresIn: "7days"
+	});
 
 	return { token };
 };

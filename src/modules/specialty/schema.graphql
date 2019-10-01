@@ -1,0 +1,18 @@
+type Mutation {
+	createSpecialty(specialty: SpecialtyInput!): Specialty
+}
+
+input SpecialtyInput {
+	code: Int!
+	name: String
+	description: String
+	value: Int
+}
+
+type Specialty {
+	id: ID!
+	code: Int
+	name: String
+	description: String
+	value: Int
+}

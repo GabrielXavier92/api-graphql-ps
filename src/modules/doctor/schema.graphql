@@ -1,0 +1,31 @@
+# import Specialty from "../specialty/schema.graphql"
+type Query {
+	fetchDoctors: [Doctor]
+	fetchDoctor(id: ID!): Doctor
+}
+
+type Mutation {
+	createDoctor(doctor: DoctorInput!): Doctor
+	updateDoctor(doctor: DoctorInput!): Doctor
+	deleteDoctor(id: ID!): Boolean
+}
+
+input DoctorInput {
+	id: ID
+	name: String!
+	gender: String
+	birth: String
+	cro: Int
+	status: Boolean
+	specialties: [ID]
+}
+
+type Doctor {
+	id: ID!
+	name: String!
+	birth: String
+	cro: Int
+	status: Boolean
+	gender: String
+	doctorSpecialties: [Specialty]
+}

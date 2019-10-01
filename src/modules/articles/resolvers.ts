@@ -5,15 +5,6 @@ export const resolvers: ResolverMap = {
 		publishArticle: (_, { title, content }, __) => {
 			const article = { title, content };
 			return article;
-		},
-		post: (_, args) => {
-			const link = {
-				id: `id-doido`,
-				description: args.description,
-				url: args.url
-			};
-
-			return link;
 		}
 	}
 };

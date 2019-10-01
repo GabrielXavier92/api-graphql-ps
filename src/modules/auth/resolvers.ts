@@ -1,8 +1,8 @@
 import { ResolverMap } from "../../types/graphql-utils";
 import { register } from "./functions/register";
 import { login } from "./functions/login";
-import { forgotPassword } from "./functions/forgotPassword";
-import { changePassword } from "./functions/changePassword";
+import { forgotPassword } from "./functions/forgot-password";
+import { changePassword } from "./functions/change-password";
 
 export const resolvers: ResolverMap = {
 	Query: {

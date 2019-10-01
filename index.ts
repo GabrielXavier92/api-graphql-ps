@@ -5,9 +5,11 @@ import { ApolloServer } from "apollo-server";
 import { resolversComposition } from "./src/modules/resolvers-composition";
 import { GraphQLModule } from "@graphql-modules/core";
 
-import { commonModule } from "./src/modules/common/common-module";
 import { authModule } from "./src/modules/auth/auth-module";
 import { articlesModule } from "./src/modules/articles/articles-module";
+import { doctorModule } from "./src/modules/doctor/doctor-module";
+import { specialtyModule } from "./src/modules/specialty/specialty-module";
+
 import { createConnection } from "./src/utils/create-connection";
 
 import { Request } from "express";
@@ -15,7 +17,7 @@ import { Request } from "express";
 const startServer = async () => {
 	const app = new GraphQLModule({
 		name: "app",
-		imports: [commonModule, authModule, articlesModule],
+		imports: [authModule, articlesModule, doctorModule, specialtyModule],
 		resolversComposition,
 		context(req: Request) {
 			return req;
