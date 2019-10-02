@@ -1,18 +1,26 @@
+type Query {
+	fetchSpecialties: [Specialty]
+	fetchSpecialty(id: ID!): Specialty
+}
+
 type Mutation {
 	createSpecialty(specialty: SpecialtyInput!): Specialty
+	updateSpecialty(specialty: SpecialtyInput!): Specialty
+	deleteSpecialty(id: ID!): Boolean
 }
 
 input SpecialtyInput {
+	id: ID!
 	code: Int!
 	name: String
 	description: String
-	value: Int
+	value: Float
 }
 
 type Specialty {
-	id: ID!
+	id: ID
 	code: Int
 	name: String
 	description: String
-	value: Int
+	value: Float
 }
