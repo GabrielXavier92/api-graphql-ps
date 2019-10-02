@@ -49,7 +49,7 @@ export class Schedule extends BaseEntity {
 	@Column("time without time zone")
 	day: string;
 
-	@Column("integer", { default: 0, nullable: true })
+	@Column("float", { default: 0, nullable: true })
 	value: number;
 
 	@Column("varchar", { nullable: true })

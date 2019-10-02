@@ -9,11 +9,11 @@ import { deleteDoctor } from "./functions/delete-doctor";
 
 export const resolvers: ResolverMap = {
 	Query: {
-		fetchDoctors: async (_, __, { currentUser }) => {
-			return await fetchDoctors(currentUser);
-		},
 		fetchDoctor: async (_, args: GQL.IFetchDoctorOnQueryArguments) => {
 			return await fetchDoctor(args);
+		},
+		fetchDoctors: async (_, __, { currentUser }) => {
+			return await fetchDoctors(currentUser);
 		}
 	},
 	Mutation: {

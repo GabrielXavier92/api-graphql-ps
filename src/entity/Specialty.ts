@@ -8,11 +8,8 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	OneToMany,
 	BeforeInsert
 } from "typeorm";
-
-import { Service } from "./Service";
 
 import * as uuidv4 from "uuid/v4";
 
@@ -23,9 +20,6 @@ export class Specialty extends BaseEntity {
 
 	@ManyToOne(_ => User, user => user.specialtys, { nullable: false })
 	user: User;
-
-	@OneToMany(_ => Service, service => service.specialty)
-	services: Service[];
 
 	//@ManyToMany with DOCTOR
 
@@ -38,7 +32,7 @@ export class Specialty extends BaseEntity {
 	@Column("text", { nullable: true })
 	description: string;
 
-	@Column("integer", { default: 0 })
+	@Column("float", { default: 0 })
 	value: number;
 
 	@Column("boolean", { default: true })

@@ -7,9 +7,11 @@ import {
 	ManyToOne,
 	BaseEntity,
 	CreateDateColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
+	BeforeInsert
 } from "typeorm";
-import { Specialty } from "./Specialty";
+
+import * as uuidv4 from "uuid/v4";
 
 @Entity("service")
 export class Service extends BaseEntity {
@@ -18,9 +20,6 @@ export class Service extends BaseEntity {
 
 	@ManyToOne(_ => User, user => user.services, { nullable: false })
 	user: User;
-
-	@ManyToOne(_ => Specialty, specialty => specialty.services, { nullable: false })
-	specialty: User;
 
 	//@ManyToMany with HANDBOOK
 	//@ManyToMany with GUIDE
@@ -42,4 +41,9 @@ export class Service extends BaseEntity {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date;
+
+	@BeforeInsert()
+	addId() {
+		this.id = uuidv4();
+	}
 }

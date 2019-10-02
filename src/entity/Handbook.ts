@@ -8,7 +8,6 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	OneToMany,
 	ManyToMany,
 	JoinTable
 } from "typeorm";
@@ -30,9 +29,6 @@ export class Handbook extends BaseEntity {
 	@ManyToOne(_ => Doctor, doctor => doctor.handbooks, { nullable: false })
 	doctor: Doctor;
 
-	@OneToMany(_ => Service, service => service.specialty)
-	services: Service[];
-
 	@ManyToMany(() => Service, service => service.id)
 	@JoinTable({ name: "handbook_service" })
 	handbookServices: Service[];
@@ -46,7 +42,7 @@ export class Handbook extends BaseEntity {
 	@Column("text", { nullable: true })
 	description: string;
 
-	@Column("integer", { default: 0 })
+	@Column("float", { default: 0 })
 	value: number;
 
 	@Column("boolean", { default: true })

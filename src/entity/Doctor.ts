@@ -20,6 +20,7 @@ import { Specialty } from "./Specialty";
 import { Handbook } from "./Handbook";
 import { Guide } from "./Guide";
 import { Schedule } from "./Schedule";
+import { Service } from "./Service";
 
 export enum Gender {
 	MASCULINO = "MASCULINO",
@@ -43,6 +44,10 @@ export class Doctor extends BaseEntity {
 	@ManyToMany(() => Specialty, specialty => specialty.id)
 	@JoinTable({ name: "doctor_specialty" })
 	doctorSpecialties: Specialty[];
+
+	@ManyToMany(() => Service, service => service.id)
+	@JoinTable({ name: "doctor_service" })
+	doctorServices: Service[];
 
 	@OneToMany(_ => Schedule, schedule => schedule.doctor)
 	schedules: Schedule[];
