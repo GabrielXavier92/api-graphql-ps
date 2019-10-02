@@ -15,8 +15,8 @@ import { Guide } from "./Guide";
 import { Schedule } from "./Schedule";
 
 enum Gender {
-	MASCULINO = "masculino",
-	FEMININO = "feminino"
+	MASCULINO = "MASCULINO",
+	FEMININO = "FEMININO"
 }
 
 @Entity("patient")
@@ -24,7 +24,7 @@ export class Patient extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.patients)
+	@ManyToOne(_ => User, user => user.patients, { nullable: false })
 	user: User;
 
 	@OneToMany(_ => Handbook, handbook => handbook.patient)
@@ -39,7 +39,7 @@ export class Patient extends BaseEntity {
 	@Column("varchar", { length: 255 })
 	name: string;
 
-	@Column({ type: "enum", enum: Gender, default: Gender.MASCULINO })
+	@Column("enum", { enum: Gender, nullable: true })
 	gender: Gender;
 
 	@Column("time without time zone", { nullable: true })

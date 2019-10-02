@@ -1,6 +1,6 @@
 import { Specialty } from "./../../../entity/Specialty";
 import { User as UserInterface } from "./../../auth/auth-helpers";
-import { Doctor } from "./../../../entity/Doctor";
+import { Doctor, Gender } from "./../../../entity/Doctor";
 import { minLengthName, failedToCreateDoctor } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 import * as yup from "yup";
@@ -24,7 +24,7 @@ export const createDoctor = async (
 		const { name, gender, birth, cro, specialties } = args.doctor;
 		const doctor = Doctor.create({
 			name,
-			gender: gender!,
+			gender: (gender! as any) as Gender,
 			birth: birth!,
 			cro: cro!,
 			user: { id: currentUser.id }

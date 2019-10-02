@@ -13,7 +13,7 @@ type Mutation {
 input DoctorInput {
 	id: ID
 	name: String!
-	gender: String
+	gender: Gender
 	birth: String
 	cro: Int
 	status: Boolean
@@ -26,6 +26,11 @@ type Doctor {
 	birth: String
 	cro: Int
 	status: Boolean
-	gender: String
+	gender: Gender
 	doctorSpecialties: [Specialty]
+}
+
+enum Gender {
+	MASCULINO
+	FEMININO
 }

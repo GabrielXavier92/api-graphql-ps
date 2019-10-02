@@ -16,10 +16,10 @@ export class Service extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.services)
+	@ManyToOne(_ => User, user => user.services, { nullable: false })
 	user: User;
 
-	@ManyToOne(_ => Specialty, specialty => specialty.services)
+	@ManyToOne(_ => Specialty, specialty => specialty.services, { nullable: false })
 	specialty: User;
 
 	//@ManyToMany with HANDBOOK

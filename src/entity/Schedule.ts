@@ -27,13 +27,13 @@ export class Schedule extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.schedules)
+	@ManyToOne(_ => User, user => user.schedules, { nullable: false })
 	user: User;
 
-	@ManyToOne(_ => Doctor, doctor => doctor.schedules)
+	@ManyToOne(_ => Doctor, doctor => doctor.schedules, { nullable: false })
 	doctor: Doctor;
 
-	@ManyToOne(_ => Patient, patient => patient.schedules)
+	@ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
 	patient: Patient;
 
 	@ManyToMany(() => Service, service => service.id)
@@ -49,7 +49,7 @@ export class Schedule extends BaseEntity {
 	@Column("time without time zone")
 	day: string;
 
-	@Column("integer", { default: 0 })
+	@Column("integer", { default: 0, nullable: true })
 	value: number;
 
 	@Column("varchar", { nullable: true })

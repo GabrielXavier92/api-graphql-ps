@@ -20,13 +20,13 @@ export class Guide extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.guides)
+	@ManyToOne(_ => User, user => user.guides, { nullable: false })
 	user: User;
 
-	@ManyToOne(_ => Doctor, doctor => doctor.guides)
+	@ManyToOne(_ => Doctor, doctor => doctor.guides, { nullable: false })
 	doctor: Doctor;
 
-	@ManyToOne(_ => Patient, patient => patient.guides)
+	@ManyToOne(_ => Patient, patient => patient.guides, { nullable: false })
 	patient: Patient;
 
 	@ManyToMany(() => Service, service => service.id)

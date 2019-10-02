@@ -21,7 +21,7 @@ export class Specialty extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.specialtys)
+	@ManyToOne(_ => User, user => user.specialtys, { nullable: false })
 	user: User;
 
 	@OneToMany(_ => Service, service => service.specialty)

@@ -21,10 +21,10 @@ import { Handbook } from "./Handbook";
 import { Guide } from "./Guide";
 import { Schedule } from "./Schedule";
 
-// enum Gender {
-// 	MASCULINO = "masculino",
-// 	FEMININO = "feminino"
-// }
+export enum Gender {
+	MASCULINO = "MASCULINO",
+	FEMININO = "FEMININO"
+}
 
 @Entity("doctor")
 export class Doctor extends BaseEntity {
@@ -50,8 +50,8 @@ export class Doctor extends BaseEntity {
 	@Column("varchar", { length: 255 })
 	name: string;
 
-	@Column("varchar", { length: 255, nullable: true })
-	gender: string;
+	@Column("enum", { enum: Gender, nullable: true })
+	gender: Gender;
 
 	@Column("time without time zone", { nullable: true })
 	birth: string;

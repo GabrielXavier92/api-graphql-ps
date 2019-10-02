@@ -1,4 +1,4 @@
-import { Doctor } from "./../../../entity/Doctor";
+import { Doctor, Gender } from "./../../../entity/Doctor";
 import { formatYupError } from "../../../utils/format-yup-error";
 import { ForbiddenError } from "apollo-server";
 import { failedToUpdate, minLengthName } from "../../../utils/messages";
@@ -22,7 +22,7 @@ export const updateDoctor = async (args: GQL.IUpdateDoctorOnMutationArguments) =
 		const doctor = await Doctor.findOneOrFail({ where: { id } });
 
 		doctor.name = name;
-		doctor.gender = gender!;
+		doctor.gender = (gender! as any) as Gender;
 		doctor.birth = birth!;
 		doctor.cro = cro!;
 
@@ -33,7 +33,7 @@ export const updateDoctor = async (args: GQL.IUpdateDoctorOnMutationArguments) =
 			doctor.doctorSpecialties = [];
 		}
 
-		doctor.save();
+		await doctor.save();
 
 		return doctor;
 	} catch (e) {
