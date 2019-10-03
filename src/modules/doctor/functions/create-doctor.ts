@@ -1,3 +1,4 @@
+import { DoctorSpecialty } from "./../../../entity/DoctorSpecialty";
 import { Specialty } from "./../../../entity/Specialty";
 import { User as UserInterface } from "./../../auth/auth-helpers";
 import { Doctor, Gender } from "./../../../entity/Doctor";
@@ -30,12 +31,22 @@ export const createDoctor = async (
 			user: { id: currentUser.id }
 		});
 
+		await doctor.save();
+
 		if (specialties) {
 			const specs = await Specialty.findByIds(specialties!);
-			doctor.doctorSpecialties = specs;
-		}
+			console.log(specs);
+			if (specs.length > 0) {
+				specs.forEach(async spec => {
+					const docSpec = DoctorSpecialty.create({
+						doctorId: doctor.id,
+						specialtyId: spec.id
+					});
 
-		await doctor.save();
+					await docSpec.save();
+				});
+			}
+		}
 
 		return doctor;
 	} catch (err) {

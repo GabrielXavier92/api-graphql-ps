@@ -4,7 +4,7 @@ import { ForbiddenError } from "apollo-server";
 import { failedToUpdate, minLengthName } from "../../../utils/messages";
 
 import * as yup from "yup";
-import { Specialty } from "../../../entity/Specialty";
+// import { Specialty } from "../../../entity/Specialty";
 
 const schema = yup.object().shape({
 	name: yup.string().min(5, minLengthName)
@@ -27,8 +27,8 @@ export const updateDoctor = async (args: GQL.IUpdateDoctorOnMutationArguments) =
 		doctor.cro = cro!;
 
 		if (specialties) {
-			const specs = await Specialty.findByIds(specialties!);
-			doctor.doctorSpecialties = specs;
+			// const specs = await Specialty.findByIds(specialties!);
+			// doctor.doctorSpecialties = specs;
 		} else {
 			doctor.doctorSpecialties = [];
 		}

@@ -8,10 +8,12 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	BeforeInsert
+	BeforeInsert,
+	OneToMany
 } from "typeorm";
 
 import * as uuidv4 from "uuid/v4";
+import { DoctorSpecialty } from "./DoctorSpecialty";
 
 @Entity("specialty")
 export class Specialty extends BaseEntity {
@@ -22,6 +24,8 @@ export class Specialty extends BaseEntity {
 	user: User;
 
 	//@ManyToMany with DOCTOR
+	@OneToMany(_ => DoctorSpecialty, doctorSpecialty => doctorSpecialty.specialty)
+	specialtiesDoctor: DoctorSpecialty[];
 
 	@Column("varchar", { length: 255 })
 	name: string;

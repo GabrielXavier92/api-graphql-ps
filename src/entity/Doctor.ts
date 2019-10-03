@@ -16,11 +16,11 @@ import {
 
 import * as uuidv4 from "uuid/v4";
 
-import { Specialty } from "./Specialty";
 import { Handbook } from "./Handbook";
 import { Guide } from "./Guide";
 import { Schedule } from "./Schedule";
 import { Service } from "./Service";
+import { DoctorSpecialty } from "./DoctorSpecialty";
 
 export enum Gender {
 	MASCULINO = "MASCULINO",
@@ -41,9 +41,9 @@ export class Doctor extends BaseEntity {
 	@OneToMany(_ => Guide, guide => guide.doctor)
 	guides: Guide[];
 
-	@ManyToMany(() => Specialty, specialty => specialty.id)
-	@JoinTable({ name: "doctor_specialty" })
-	doctorSpecialties: Specialty[];
+	//@ManyToMany with DOCTOR
+	@OneToMany(_ => DoctorSpecialty, doctorSpecialty => doctorSpecialty.doctor)
+	doctorSpecialties: DoctorSpecialty[];
 
 	@ManyToMany(() => Service, service => service.id)
 	@JoinTable({ name: "doctor_service" })
