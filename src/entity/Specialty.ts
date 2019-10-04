@@ -1,4 +1,5 @@
 import { User } from "./User";
+import { DoctorSpecialty } from "./DoctorSpecialty";
 
 import {
 	Entity,
@@ -13,7 +14,6 @@ import {
 } from "typeorm";
 
 import * as uuidv4 from "uuid/v4";
-import { DoctorSpecialty } from "./DoctorSpecialty";
 
 @Entity("specialty")
 export class Specialty extends BaseEntity {
@@ -35,9 +35,6 @@ export class Specialty extends BaseEntity {
 
 	@Column("text", { nullable: true })
 	description: string;
-
-	@Column("float", { default: 0 })
-	value: number;
 
 	@Column("boolean", { default: true })
 	status: boolean;

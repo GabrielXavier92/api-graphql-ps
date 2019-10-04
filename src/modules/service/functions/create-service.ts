@@ -1,7 +1,7 @@
-import { User as UserInterface } from "./../../auth/auth-helpers";
+import { User as UserInterface } from "../../auth/auth-helpers";
 import { minLengthName, minLengthCode } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
-import { Specialty } from "./../../../entity/Specialty";
+import { Service } from "../../../entity/Service";
 
 import * as yup from "yup";
 
@@ -10,8 +10,8 @@ const schema = yup.object().shape({
 	name: yup.string().min(5, minLengthName)
 });
 
-export const createSpecialty = async (
-	args: GQL.ICreateSpecialtyOnMutationArguments,
+export const createService = async (
+	args: GQL.ICreateServiceOnMutationArguments,
 	currentUser: UserInterface
 ) => {
 	try {
@@ -20,18 +20,19 @@ export const createSpecialty = async (
 		formatYupError(err);
 	}
 
-	const { code, name, description } = args.specialty;
+	const { code, name, description, value } = args.service;
 
-	const specialty = Specialty.create({
-		code,
-		name: name!,
+	const service = Service.create({
+		name: name,
+		code: code!,
+		value: value!,
 		description: description!,
 		user: {
 			id: currentUser.id
 		}
 	});
 
-	await specialty.save();
+	await service.save();
 
-	return specialty;
+	return service;
 };

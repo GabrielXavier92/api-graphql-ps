@@ -8,10 +8,12 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	BeforeInsert
+	BeforeInsert,
+	OneToMany
 } from "typeorm";
 
 import * as uuidv4 from "uuid/v4";
+import { DoctorService } from "./DoctorService";
 
 @Entity("service")
 export class Service extends BaseEntity {
@@ -21,18 +23,23 @@ export class Service extends BaseEntity {
 	@ManyToOne(_ => User, user => user.services, { nullable: false })
 	user: User;
 
-	//@ManyToMany with HANDBOOK
-	//@ManyToMany with GUIDE
-	//@ManyToMany with SCHEDULE
+	@OneToMany(_ => DoctorService, doctorService => doctorService.service)
+	servicesDoctor: DoctorService[];
 
 	@Column("varchar", { length: 255 })
 	name: string;
 
-	@Column("varchar", { length: 255 })
-	code: string;
+	@Column("integer")
+	code: number;
 
 	@Column("text", { nullable: true })
 	description: string;
+
+	@Column("float", { default: 0 })
+	value: number;
+
+	@Column("boolean", { default: true })
+	status: boolean;
 
 	@Column()
 	@CreateDateColumn()

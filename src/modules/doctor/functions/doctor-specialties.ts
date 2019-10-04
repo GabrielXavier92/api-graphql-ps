@@ -11,10 +11,7 @@ export const doctorSpecialties = async ({ id }: Doctor) => {
 			},
 			relations: ["specialty"]
 		});
-
-		return specialties.map(spec => {
-			return spec.specialty;
-		});
+		return specialties.map(spec => spec.specialty);
 	} catch (err) {
 		throw new ForbiddenError(failedToFetch);
 	}

@@ -10,15 +10,15 @@ export class DoctorSpecialty extends BaseEntity {
 	id: string;
 
 	@Column("uuid")
-	doctorId!: string;
+	doctorId: string;
 
 	@Column("uuid")
-	specialtyId!: string;
+	specialtyId: string;
 
 	@ManyToOne(_ => Doctor, doctor => doctor.doctorSpecialties, { onDelete: "CASCADE" })
 	doctor: Doctor;
 
-	@ManyToOne(_ => Specialty, specialty => specialty.specialtiesDoctor)
+	@ManyToOne(_ => Specialty, specialty => specialty.specialtiesDoctor, { onDelete: "CASCADE" })
 	specialty: Specialty;
 
 	@BeforeInsert()

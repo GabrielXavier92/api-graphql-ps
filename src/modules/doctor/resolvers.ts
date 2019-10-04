@@ -1,3 +1,4 @@
+import { doctorServices } from "./functions/doctor-services";
 import { Doctor } from "./../../entity/Doctor";
 import { createDoctor } from "./functions/create-doctor";
 import { ResolverMap } from "../../types/graphql-utils";
@@ -30,6 +31,9 @@ export const resolvers: ResolverMap = {
 	Doctor: {
 		doctorSpecialties: async (parent: Doctor) => {
 			return await doctorSpecialties(parent);
+		},
+		doctorServices: async (parent: Doctor) => {
+			return await doctorServices(parent);
 		}
 	}
 };

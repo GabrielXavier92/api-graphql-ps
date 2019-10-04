@@ -10,11 +10,10 @@ type Mutation {
 }
 
 input SpecialtyInput {
-	id: ID!
+	id: ID
 	code: Int!
 	name: String
 	description: String
-	value: Float
 }
 
 type Specialty {
@@ -22,5 +21,4 @@ type Specialty {
 	code: Int
 	name: String
 	description: String
-	value: Float
 }

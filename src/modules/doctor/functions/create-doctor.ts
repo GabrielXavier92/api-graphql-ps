@@ -1,3 +1,5 @@
+import { DoctorService } from "./../../../entity/DoctorService";
+import { Service } from "./../../../entity/Service";
 import { DoctorSpecialty } from "./../../../entity/DoctorSpecialty";
 import { Specialty } from "./../../../entity/Specialty";
 import { User as UserInterface } from "./../../auth/auth-helpers";
@@ -22,7 +24,7 @@ export const createDoctor = async (
 	}
 
 	try {
-		const { name, gender, birth, cro, specialties } = args.doctor;
+		const { name, gender, birth, cro, specialties, services } = args.doctor;
 		const doctor = Doctor.create({
 			name,
 			gender: (gender! as any) as Gender,
@@ -35,15 +37,27 @@ export const createDoctor = async (
 
 		if (specialties) {
 			const specs = await Specialty.findByIds(specialties!);
-			console.log(specs);
 			if (specs.length > 0) {
 				specs.forEach(async spec => {
 					const docSpec = DoctorSpecialty.create({
 						doctorId: doctor.id,
 						specialtyId: spec.id
 					});
-
 					await docSpec.save();
+				});
+			}
+		}
+
+		if (services) {
+			const servs = await Service.findByIds(services!);
+			if (servs.length > 0) {
+				servs.forEach(async serv => {
+					const docServ = DoctorService.create({
+						doctorId: doctor.id,
+						serviceId: serv.id
+					});
+
+					await docServ.save();
 				});
 			}
 		}

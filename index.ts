@@ -1,3 +1,4 @@
+import { serviceModule } from "./src/modules/service/service-module";
 import "reflect-metadata"; // typeorm
 import "dotenv/config";
 
@@ -17,7 +18,7 @@ import { Request } from "express";
 const startServer = async () => {
 	const app = new GraphQLModule({
 		name: "app",
-		imports: [authModule, articlesModule, doctorModule, specialtyModule],
+		imports: [authModule, articlesModule, doctorModule, specialtyModule, serviceModule],
 		resolversComposition,
 		context(req: Request) {
 			return req;

@@ -1,0 +1,28 @@
+type Query {
+	fetchServices: [Service]
+	fetchService(id: ID!): Service
+}
+
+type Mutation {
+	createService(service: ServiceInput!): Service
+	updateService(service: ServiceInput!): Service
+	deleteService(id: ID!): Boolean
+}
+
+input ServiceInput {
+	id: ID
+	name: String!
+	code: Int
+	description: String
+	value: Float
+	status: Boolean
+}
+
+type Service {
+	id: ID
+	code: Int
+	name: String
+	description: String
+	value: Float
+	status: Boolean
+}

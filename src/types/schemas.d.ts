@@ -25,11 +25,17 @@ declare namespace GQL {
     me: string | null;
     fetchDoctors: Array<IDoctor | null> | null;
     fetchDoctor: IDoctor | null;
+    fetchServices: Array<IService | null> | null;
+    fetchService: IService | null;
     fetchSpecialties: Array<ISpecialty | null> | null;
     fetchSpecialty: ISpecialty | null;
   }
 
   interface IFetchDoctorOnQueryArguments {
+    id: string;
+  }
+
+  interface IFetchServiceOnQueryArguments {
     id: string;
   }
 
@@ -46,6 +52,7 @@ declare namespace GQL {
     status: boolean | null;
     gender: Gender | null;
     doctorSpecialties: Array<ISpecialty | null> | null;
+    doctorServices: Array<IService | null> | null;
   }
 
   const enum Gender {
@@ -59,7 +66,16 @@ declare namespace GQL {
     code: number | null;
     name: string | null;
     description: string | null;
+  }
+
+  interface IService {
+    __typename: 'Service';
+    id: string | null;
+    code: number | null;
+    name: string | null;
+    description: string | null;
     value: number | null;
+    status: boolean | null;
   }
 
   interface IMutation {
@@ -72,6 +88,9 @@ declare namespace GQL {
     createDoctor: IDoctor | null;
     updateDoctor: IDoctor | null;
     deleteDoctor: boolean | null;
+    createService: IService | null;
+    updateService: IService | null;
+    deleteService: boolean | null;
     createSpecialty: ISpecialty | null;
     updateSpecialty: ISpecialty | null;
     deleteSpecialty: boolean | null;
@@ -115,6 +134,18 @@ declare namespace GQL {
     id: string;
   }
 
+  interface ICreateServiceOnMutationArguments {
+    service: IServiceInput;
+  }
+
+  interface IUpdateServiceOnMutationArguments {
+    service: IServiceInput;
+  }
+
+  interface IDeleteServiceOnMutationArguments {
+    id: string;
+  }
+
   interface ICreateSpecialtyOnMutationArguments {
     specialty: ISpecialtyInput;
   }
@@ -155,14 +186,23 @@ declare namespace GQL {
     cro?: number | null;
     status?: boolean | null;
     specialties?: Array<string | null> | null;
+    services?: Array<string | null> | null;
+  }
+
+  interface IServiceInput {
+    id?: string | null;
+    name: string;
+    code?: number | null;
+    description?: string | null;
+    value?: number | null;
+    status?: boolean | null;
   }
 
   interface ISpecialtyInput {
-    id: string;
+    id?: string | null;
     code: number;
     name?: string | null;
     description?: string | null;
-    value?: number | null;
   }
 
   interface ILink {

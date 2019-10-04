@@ -1,3 +1,4 @@
+import { DoctorService } from "./DoctorService";
 import { User } from "./User";
 
 import {
@@ -9,8 +10,6 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	ManyToMany,
-	JoinTable,
 	OneToMany
 } from "typeorm";
 
@@ -45,8 +44,7 @@ export class Doctor extends BaseEntity {
 	@OneToMany(_ => DoctorSpecialty, doctorSpecialty => doctorSpecialty.doctor)
 	doctorSpecialties: DoctorSpecialty[];
 
-	@ManyToMany(() => Service, service => service.id)
-	@JoinTable({ name: "doctor_service" })
+	@OneToMany(_ => DoctorService, doctorService => doctorService.doctor)
 	doctorServices: Service[];
 
 	@OneToMany(_ => Schedule, schedule => schedule.doctor)

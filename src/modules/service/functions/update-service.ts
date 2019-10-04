@@ -1,4 +1,4 @@
-import { Specialty } from "./../../../entity/Specialty";
+import { Service } from "./../../../entity/Service";
 import { minLengthCode, minLengthName, failedToUpdate } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 
@@ -10,7 +10,7 @@ const schema = yup.object().shape({
 	name: yup.string().min(5, minLengthName)
 });
 
-export const updateSpecialty = async (args: GQL.IUpdateSpecialtyOnMutationArguments) => {
+export const updateService = async (args: GQL.IUpdateServiceOnMutationArguments) => {
 	try {
 		await schema.validate({ args }, { abortEarly: false });
 	} catch (err) {
@@ -18,16 +18,17 @@ export const updateSpecialty = async (args: GQL.IUpdateSpecialtyOnMutationArgume
 	}
 
 	try {
-		const { id, name, code, description } = args.specialty;
-		const specialty = await Specialty.findOneOrFail({ where: { id } });
+		const { id, code, name, description, value } = args.service;
+		const service = await Service.findOneOrFail({ where: { id } });
 
-		specialty.code = code;
-		specialty.name = name!;
-		specialty.description = description!;
+		service.name = name;
+		service.code = code!;
+		service.description = description!;
+		service.value = value!;
 
-		await specialty.save();
+		await service.save();
 
-		return specialty;
+		return service;
 	} catch (e) {
 		throw new ForbiddenError(failedToUpdate);
 	}

@@ -3,6 +3,7 @@ import { ResolverMap } from "./../../types/graphql-utils.d";
 import { fetchSpecialty } from "./functions/fetch-specialty";
 import { fetchSpecialties } from "./functions/fetch-specialties";
 import { updateSpecialty } from "./functions/update-specialty";
+import { deleteSpecialty } from "./functions/delete-specialty";
 
 export const resolvers: ResolverMap = {
 	Query: {
@@ -20,6 +21,8 @@ export const resolvers: ResolverMap = {
 		updateSpecialty: async (_, args: GQL.IUpdateSpecialtyOnMutationArguments) => {
 			return await updateSpecialty(args);
 		},
-		deleteSpecialty: async () => {}
+		deleteSpecialty: async (_, args: GQL.IDeleteSpecialtyOnMutationArguments) => {
+			return await deleteSpecialty(args);
+		}
 	}
 };
