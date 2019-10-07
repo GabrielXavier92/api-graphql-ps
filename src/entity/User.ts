@@ -1,8 +1,10 @@
-import { Handbook } from "./Handbook";
 import { Doctor } from "./Doctor";
+import { Guide } from "./Guide";
+import { Handbook } from "./Handbook";
 import { Patient } from "./Patient";
 import { Specialty } from "./Specialty";
 import { Service } from "./Service";
+import { Schedule } from "./Schedule";
 
 import {
 	Entity,
@@ -15,8 +17,6 @@ import {
 	OneToMany
 } from "typeorm";
 import * as uuidv4 from "uuid/v4";
-import { Guide } from "./Guide";
-import { Schedule } from "./Schedule";
 
 @Entity("user")
 export class User extends BaseEntity {

@@ -1,3 +1,4 @@
+import { ScheduleService } from "./ScheduleService";
 import { User } from "./User";
 
 import {
@@ -25,6 +26,9 @@ export class Service extends BaseEntity {
 
 	@OneToMany(_ => DoctorService, doctorService => doctorService.service)
 	servicesDoctor: DoctorService[];
+
+	@OneToMany(_ => ScheduleService, scheduleService => scheduleService.service)
+	scheduleService: ScheduleService[];
 
 	@Column("varchar", { length: 255 })
 	name: string;

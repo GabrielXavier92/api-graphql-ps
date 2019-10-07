@@ -1,7 +1,6 @@
 import { Doctor } from "./Doctor";
 import { User } from "./User";
 import { Patient } from "./Patient";
-import { Service } from "./Service";
 
 import {
 	Entity,
@@ -11,15 +10,18 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	ManyToMany,
-	JoinTable
+	BeforeInsert,
+	OneToMany
 } from "typeorm";
 
+import * as uuidv4 from "uuid/v4";
+import { ScheduleService } from "./ScheduleService";
+
 enum ScheduleStatus {
-	AGENDADO = "agendado",
-	ATENDENDO = "atendendo",
-	CONCLUIDO = "concluido",
-	CANCELADO = "cancelado"
+	AGENDADO = "AGENDADO",
+	ATENDENDO = "ATENDENDO",
+	CONCLUIDO = "CONCLUIDO",
+	CANCELADO = "CANCELADO"
 }
 
 @Entity("schedule")
@@ -36,9 +38,8 @@ export class Schedule extends BaseEntity {
 	@ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
 	patient: Patient;
 
-	@ManyToMany(() => Service, service => service.id)
-	@JoinTable({ name: "schedule_service" })
-	scheduleServices: Service[];
+	@OneToMany(_ => ScheduleService, scheduleService => scheduleService.schedule)
+	scheduleServices: ScheduleService[];
 
 	@Column("varchar", { length: 255 })
 	name: string;
@@ -62,4 +63,9 @@ export class Schedule extends BaseEntity {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date;
+
+	@BeforeInsert()
+	addId() {
+		this.id = uuidv4();
+	}
 }
