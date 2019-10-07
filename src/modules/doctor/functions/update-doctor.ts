@@ -8,7 +8,6 @@ import { failedToUpdate, minLengthName } from "../../../utils/messages";
 import * as yup from "yup";
 import { Specialty } from "../../../entity/Specialty";
 import { Service } from "../../../entity/Service";
-// import { Specialty } from "../../../entity/Specialty";
 
 const schema = yup.object().shape({
 	name: yup.string().min(5, minLengthName)
