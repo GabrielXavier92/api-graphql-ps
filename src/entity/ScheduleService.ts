@@ -9,10 +9,10 @@ export class ScheduleService extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@Column("uuid")
+	@Column("uuid", { nullable: false })
 	scheduleId: string;
 
-	@Column("uuid")
+	@Column("uuid", { nullable: false })
 	serviceId: string;
 
 	@ManyToOne(_ => Schedule, schedule => schedule.scheduleServices, { onDelete: "CASCADE" })

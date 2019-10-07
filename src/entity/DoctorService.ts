@@ -9,10 +9,10 @@ export class DoctorService extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@Column("uuid")
+	@Column("uuid", { nullable: false })
 	doctorId: string;
 
-	@Column("uuid")
+	@Column("uuid", { nullable: false })
 	serviceId: string;
 
 	@ManyToOne(_ => Doctor, doctor => doctor.doctorServices, { onDelete: "CASCADE" })
