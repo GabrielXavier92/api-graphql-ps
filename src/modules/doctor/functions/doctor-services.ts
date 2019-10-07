@@ -9,7 +9,7 @@ export const doctorServices = async ({ id }: Doctor) => {
 			where: {
 				doctorId: id
 			},
-			relations: ["services"]
+			relations: ["service"]
 		});
 		return services.map(serv => serv.service);
 	} catch (e) {
