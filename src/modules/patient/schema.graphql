@@ -1,0 +1,29 @@
+type Query {
+	fetchPatient(id: ID!): Patient
+	fetchPatients: [Patient]
+}
+
+type Mutation {
+	createPatient(patient: PatientInput!): Patient
+	updatePatient(patient: PatientInput!): Patient
+	deletePatient(id: ID!): Boolean
+}
+
+input PatientInput {
+	id: ID
+	name: String!
+	gender: Gender
+	birth: String
+}
+
+type Patient {
+	id: ID
+	name: String
+	gender: Gender
+	birth: String
+}
+
+enum Gender {
+	MASCULINO
+	FEMININO
+}

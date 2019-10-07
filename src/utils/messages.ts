@@ -7,6 +7,7 @@ export const minLengthCode = "Code must be at least 5 characters";
 export const failedToCreateDoctor = "Canot create doctor";
 export const failedToCreateSpecialty = "Canot create specialty";
 export const failedToCreateService = "Canot create service";
+export const failedToCreatePatient = "Canot create patient";
 export const failedToFetch = "Falied to fetch";
 export const failedToUpdate = "Failed to update";
 

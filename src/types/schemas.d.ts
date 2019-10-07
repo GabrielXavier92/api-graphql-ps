@@ -25,6 +25,8 @@ declare namespace GQL {
     me: string | null;
     fetchDoctors: Array<IDoctor | null> | null;
     fetchDoctor: IDoctor | null;
+    fetchPatient: IPatient | null;
+    fetchPatients: Array<IPatient | null> | null;
     fetchServices: Array<IService | null> | null;
     fetchService: IService | null;
     fetchSpecialties: Array<ISpecialty | null> | null;
@@ -32,6 +34,10 @@ declare namespace GQL {
   }
 
   interface IFetchDoctorOnQueryArguments {
+    id: string;
+  }
+
+  interface IFetchPatientOnQueryArguments {
     id: string;
   }
 
@@ -78,6 +84,14 @@ declare namespace GQL {
     status: boolean | null;
   }
 
+  interface IPatient {
+    __typename: 'Patient';
+    id: string | null;
+    name: string | null;
+    gender: Gender | null;
+    birth: string | null;
+  }
+
   interface IMutation {
     __typename: 'Mutation';
     publishArticle: IArticle | null;
@@ -88,6 +102,9 @@ declare namespace GQL {
     createDoctor: IDoctor | null;
     updateDoctor: IDoctor | null;
     deleteDoctor: boolean | null;
+    createPatient: IPatient | null;
+    updatePatient: IPatient | null;
+    deletePatient: boolean | null;
     createService: IService | null;
     updateService: IService | null;
     deleteService: boolean | null;
@@ -131,6 +148,18 @@ declare namespace GQL {
   }
 
   interface IDeleteDoctorOnMutationArguments {
+    id: string;
+  }
+
+  interface ICreatePatientOnMutationArguments {
+    patient: IPatientInput;
+  }
+
+  interface IUpdatePatientOnMutationArguments {
+    patient: IPatientInput;
+  }
+
+  interface IDeletePatientOnMutationArguments {
     id: string;
   }
 
@@ -187,6 +216,13 @@ declare namespace GQL {
     status?: boolean | null;
     specialties?: Array<string | null> | null;
     services?: Array<string | null> | null;
+  }
+
+  interface IPatientInput {
+    id?: string | null;
+    name: string;
+    gender?: Gender | null;
+    birth?: string | null;
   }
 
   interface IServiceInput {

@@ -1,4 +1,3 @@
-import { serviceModule } from "./src/modules/service/service-module";
 import "reflect-metadata"; // typeorm
 import "dotenv/config";
 
@@ -10,6 +9,8 @@ import { authModule } from "./src/modules/auth/auth-module";
 import { articlesModule } from "./src/modules/articles/articles-module";
 import { doctorModule } from "./src/modules/doctor/doctor-module";
 import { specialtyModule } from "./src/modules/specialty/specialty-module";
+import { serviceModule } from "./src/modules/service/service-module";
+import { patientModule } from "./src/modules/patient/patient-module";
 
 import { createConnection } from "./src/utils/create-connection";
 
@@ -18,7 +19,14 @@ import { Request } from "express";
 const startServer = async () => {
 	const app = new GraphQLModule({
 		name: "app",
-		imports: [authModule, articlesModule, doctorModule, specialtyModule, serviceModule],
+		imports: [
+			authModule,
+			articlesModule,
+			doctorModule,
+			specialtyModule,
+			serviceModule,
+			patientModule
+		],
 		resolversComposition,
 		context(req: Request) {
 			return req;

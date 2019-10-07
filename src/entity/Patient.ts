@@ -8,11 +8,13 @@ import {
 	BaseEntity,
 	CreateDateColumn,
 	UpdateDateColumn,
-	OneToMany
+	OneToMany,
+	BeforeInsert
 } from "typeorm";
 import { Handbook } from "./Handbook";
 import { Guide } from "./Guide";
 import { Schedule } from "./Schedule";
+import * as uuidv4 from "uuid/v4";
 
 enum Gender {
 	MASCULINO = "MASCULINO",
@@ -52,4 +54,9 @@ export class Patient extends BaseEntity {
 	@Column()
 	@UpdateDateColumn()
 	updatedAt: Date;
+
+	@BeforeInsert()
+	addId() {
+		this.id = uuidv4();
+	}
 }
