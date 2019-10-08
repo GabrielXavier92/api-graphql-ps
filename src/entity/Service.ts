@@ -28,7 +28,7 @@ export class Service extends BaseEntity {
 	servicesDoctor: DoctorService[];
 
 	@OneToMany(_ => ScheduleService, scheduleService => scheduleService.service)
-	scheduleService: ScheduleService[];
+	serviceSchedule: ScheduleService[];
 
 	@Column("varchar", { length: 255 })
 	name: string;

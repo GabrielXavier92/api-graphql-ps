@@ -8,6 +8,7 @@ export const failedToCreateDoctor = "Canot create doctor";
 export const failedToCreateSpecialty = "Canot create specialty";
 export const failedToCreateService = "Canot create service";
 export const failedToCreatePatient = "Canot create patient";
+export const failedToCreateSchedule = "Canot create schedule";
 export const failedToFetch = "Falied to fetch";
 export const failedToUpdate = "Failed to update";
 

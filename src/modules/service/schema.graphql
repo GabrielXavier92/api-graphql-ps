@@ -12,14 +12,14 @@ type Mutation {
 input ServiceInput {
 	id: ID
 	name: String!
-	code: Int
+	code: Int!
 	description: String
 	value: Float
 	status: Boolean
 }
 
 type Service {
-	id: ID
+	id: ID!
 	code: Int
 	name: String
 	description: String

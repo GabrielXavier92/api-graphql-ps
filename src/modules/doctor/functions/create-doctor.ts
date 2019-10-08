@@ -37,29 +37,25 @@ export const createDoctor = async (
 
 		if (specialties) {
 			const specs = await Specialty.findByIds(specialties!);
-			if (specs.length > 0) {
-				specs.forEach(async spec => {
-					const docSpec = DoctorSpecialty.create({
-						doctorId: doctor.id,
-						specialtyId: spec.id
-					});
-					await docSpec.save();
+			specs.forEach(async spec => {
+				const docSpec = DoctorSpecialty.create({
+					doctorId: doctor.id,
+					specialtyId: spec.id
 				});
-			}
+				await docSpec.save();
+			});
 		}
 
 		if (services) {
 			const servs = await Service.findByIds(services!);
-			if (servs.length > 0) {
-				servs.forEach(async serv => {
-					const docServ = DoctorService.create({
-						doctorId: doctor.id,
-						serviceId: serv.id
-					});
-
-					await docServ.save();
+			servs.forEach(async serv => {
+				const docServ = DoctorService.create({
+					doctorId: doctor.id,
+					serviceId: serv.id
 				});
-			}
+
+				await docServ.save();
+			});
 		}
 
 		return doctor;

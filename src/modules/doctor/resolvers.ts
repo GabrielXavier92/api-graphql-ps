@@ -29,10 +29,10 @@ export const resolvers: ResolverMap = {
 		}
 	},
 	Doctor: {
-		doctorSpecialties: async (parent: Doctor) => {
+		specialties: async (parent: Doctor) => {
 			return await doctorSpecialties(parent);
 		},
-		doctorServices: async (parent: Doctor) => {
+		services: async (parent: Doctor) => {
 			return await doctorServices(parent);
 		}
 	}

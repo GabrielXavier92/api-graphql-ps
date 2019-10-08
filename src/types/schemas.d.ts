@@ -27,6 +27,8 @@ declare namespace GQL {
     fetchDoctor: IDoctor | null;
     fetchPatient: IPatient | null;
     fetchPatients: Array<IPatient | null> | null;
+    fetchSchedule: ISchedule | null;
+    fetchSchedules: Array<ISchedule | null> | null;
     fetchServices: Array<IService | null> | null;
     fetchService: IService | null;
     fetchSpecialties: Array<ISpecialty | null> | null;
@@ -38,6 +40,10 @@ declare namespace GQL {
   }
 
   interface IFetchPatientOnQueryArguments {
+    id: string;
+  }
+
+  interface IFetchScheduleOnQueryArguments {
     id: string;
   }
 
@@ -57,8 +63,8 @@ declare namespace GQL {
     cro: number | null;
     status: boolean | null;
     gender: Gender | null;
-    doctorSpecialties: Array<ISpecialty | null> | null;
-    doctorServices: Array<IService | null> | null;
+    specialties: Array<ISpecialty | null> | null;
+    services: Array<IService | null> | null;
   }
 
   const enum Gender {
@@ -68,7 +74,7 @@ declare namespace GQL {
 
   interface ISpecialty {
     __typename: 'Specialty';
-    id: string | null;
+    id: string;
     code: number | null;
     name: string | null;
     description: string | null;
@@ -76,7 +82,7 @@ declare namespace GQL {
 
   interface IService {
     __typename: 'Service';
-    id: string | null;
+    id: string;
     code: number | null;
     name: string | null;
     description: string | null;
@@ -86,10 +92,28 @@ declare namespace GQL {
 
   interface IPatient {
     __typename: 'Patient';
-    id: string | null;
-    name: string | null;
+    id: string;
+    name: string;
     gender: Gender | null;
     birth: string | null;
+  }
+
+  interface ISchedule {
+    __typename: 'Schedule';
+    id: string;
+    doctor: IDoctor;
+    name: string | null;
+    status: ScheduleStatus | null;
+    day: string | null;
+    value: number | null;
+    color: string | null;
+  }
+
+  const enum ScheduleStatus {
+    AGENDADO = 'AGENDADO',
+    ATENDENDO = 'ATENDENDO',
+    CONCLUIDO = 'CONCLUIDO',
+    CANCELADO = 'CANCELADO'
   }
 
   interface IMutation {
@@ -105,6 +129,9 @@ declare namespace GQL {
     createPatient: IPatient | null;
     updatePatient: IPatient | null;
     deletePatient: boolean | null;
+    createSchedule: ISchedule | null;
+    updateSchedule: ISchedule | null;
+    deleteSchedule: boolean | null;
     createService: IService | null;
     updateService: IService | null;
     deleteService: boolean | null;
@@ -160,6 +187,18 @@ declare namespace GQL {
   }
 
   interface IDeletePatientOnMutationArguments {
+    id: string;
+  }
+
+  interface ICreateScheduleOnMutationArguments {
+    schedule: IScheduleInput;
+  }
+
+  interface IUpdateScheduleOnMutationArguments {
+    schedule: IScheduleInput;
+  }
+
+  interface IDeleteScheduleOnMutationArguments {
     id: string;
   }
 
@@ -225,10 +264,21 @@ declare namespace GQL {
     birth?: string | null;
   }
 
+  interface IScheduleInput {
+    doctorId: string;
+    patientId: string;
+    name?: string | null;
+    status?: ScheduleStatus | null;
+    day: string;
+    value?: number | null;
+    color?: string | null;
+    services?: Array<string | null> | null;
+  }
+
   interface IServiceInput {
     id?: string | null;
     name: string;
-    code?: number | null;
+    code: number;
     description?: string | null;
     value?: number | null;
     status?: boolean | null;

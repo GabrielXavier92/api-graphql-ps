@@ -1,0 +1,40 @@
+# import Doctor from "../doctor/schema.graphql"
+
+type Query {
+	fetchSchedule(id: ID!): Schedule
+	fetchSchedules: [Schedule]
+}
+
+type Mutation {
+	createSchedule(schedule: ScheduleInput!): Schedule
+	updateSchedule(schedule: ScheduleInput!): Schedule
+	deleteSchedule(id: ID!): Boolean
+}
+
+input ScheduleInput {
+	doctorId: ID!
+	patientId: ID!
+	name: String
+	status: ScheduleStatus
+	day: String!
+	value: Float
+	color: String
+	services: [ID]
+}
+
+type Schedule {
+	id: ID!
+	doctor: Doctor!
+	name: String
+	status: ScheduleStatus
+	day: String
+	value: Float
+	color: String
+}
+
+enum ScheduleStatus {
+	AGENDADO
+	ATENDENDO
+	CONCLUIDO
+	CANCELADO
+}

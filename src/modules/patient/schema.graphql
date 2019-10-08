@@ -17,8 +17,8 @@ input PatientInput {
 }
 
 type Patient {
-	id: ID
-	name: String
+	id: ID!
+	name: String!
 	gender: Gender
 	birth: String
 }

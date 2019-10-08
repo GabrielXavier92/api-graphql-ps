@@ -16,10 +16,10 @@ export class ScheduleService extends BaseEntity {
 	serviceId: string;
 
 	@ManyToOne(_ => Schedule, schedule => schedule.scheduleServices, { onDelete: "CASCADE" })
-	schedule: Schedule;
+	schedule: Schedule[];
 
-	@ManyToOne(_ => Service, service => service.scheduleService, { onDelete: "CASCADE" })
-	service: Service;
+	@ManyToOne(_ => Service, service => service.serviceSchedule, { onDelete: "CASCADE" })
+	service: Service[];
 
 	@BeforeInsert()
 	addId() {

@@ -17,7 +17,7 @@ input SpecialtyInput {
 }
 
 type Specialty {
-	id: ID
+	id: ID!
 	code: Int
 	name: String
 	description: String

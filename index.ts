@@ -10,6 +10,7 @@ import { articlesModule } from "./src/modules/articles/articles-module";
 import { doctorModule } from "./src/modules/doctor/doctor-module";
 import { specialtyModule } from "./src/modules/specialty/specialty-module";
 import { serviceModule } from "./src/modules/service/service-module";
+import { scheduleModule } from "./src/modules/schedule/schedule-module";
 import { patientModule } from "./src/modules/patient/patient-module";
 
 import { createConnection } from "./src/utils/create-connection";
@@ -25,6 +26,7 @@ const startServer = async () => {
 			doctorModule,
 			specialtyModule,
 			serviceModule,
+			scheduleModule,
 			patientModule
 		],
 		resolversComposition,

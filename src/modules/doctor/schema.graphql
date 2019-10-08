@@ -30,8 +30,8 @@ type Doctor {
 	cro: Int
 	status: Boolean
 	gender: Gender
-	doctorSpecialties: [Specialty]
-	doctorServices: [Service]
+	specialties: [Specialty]
+	services: [Service]
 }
 
 enum Gender {

@@ -17,7 +17,7 @@ import {
 import * as uuidv4 from "uuid/v4";
 import { ScheduleService } from "./ScheduleService";
 
-enum ScheduleStatus {
+export enum ScheduleStatus {
 	AGENDADO = "AGENDADO",
 	ATENDENDO = "ATENDENDO",
 	CONCLUIDO = "CONCLUIDO",
@@ -32,9 +32,11 @@ export class Schedule extends BaseEntity {
 	@ManyToOne(_ => User, user => user.schedules, { nullable: false })
 	user: User;
 
+	@Column("uuid", { name: "doctorId" })
 	@ManyToOne(_ => Doctor, doctor => doctor.schedules, { nullable: false })
 	doctor: Doctor;
 
+	@Column("uuid", { name: "patientId" })
 	@ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
 	patient: Patient;
 
@@ -47,8 +49,8 @@ export class Schedule extends BaseEntity {
 	@Column({ type: "enum", enum: ScheduleStatus, default: ScheduleStatus.AGENDADO })
 	status: ScheduleStatus;
 
-	@Column("time without time zone")
-	day: string;
+	@Column({ type: "timestamp", nullable: false })
+	day: Date;
 
 	@Column("float", { default: 0, nullable: true })
 	value: number;
