@@ -101,7 +101,9 @@ declare namespace GQL {
   interface ISchedule {
     __typename: 'Schedule';
     id: string;
-    doctor: IDoctor;
+    doctor: IDoctor | null;
+    patient: IPatient | null;
+    services: Array<IService | null> | null;
     name: string | null;
     status: ScheduleStatus | null;
     day: string | null;

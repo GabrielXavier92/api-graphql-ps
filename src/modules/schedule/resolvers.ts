@@ -1,9 +1,9 @@
 import { fetchSchedules } from "./functions/fetch-schedules";
-// import { fetchPatient } from "./../patient/functions/fetch-patient";
+import { fetchPatient } from "./../patient/functions/fetch-patient";
 import { createSchedule } from "./functions/create-schedule";
 import { ResolverMap } from "./../../types/graphql-utils.d";
-// import { fetchDoctor } from "../doctor/functions/fetch-doctor";
-// import { scheduleServices } from "./functions/schedule-services";
+import { fetchDoctor } from "../doctor/functions/fetch-doctor";
+import { scheduleServices } from "./functions/schedule-services";
 export const resolvers: ResolverMap = {
 	Query: {
 		fetchSchedule: async (_, args: GQL.IFetchScheduleOnQueryArguments) => {
@@ -23,18 +23,22 @@ export const resolvers: ResolverMap = {
 		deleteSchedule: async () => {
 			return true;
 		}
+	},
+	Schedule: {
+		doctor: async (parent: GQL.ISchedule) => {
+			const doctor: GQL.IFetchDoctorOnQueryArguments = {
+				id: (parent as any).doctor!
+			};
+			return await fetchDoctor(doctor);
+		},
+		patient: async (parent: GQL.ISchedule) => {
+			const patient: GQL.IFetchPatientOnQueryArguments = {
+				id: (parent as any).patient!
+			};
+			return await fetchPatient(patient);
+		},
+		services: async (parent: GQL.ISchedule) => {
+			return await scheduleServices(parent);
+		}
 	}
-	// Schedule: {
-	// 	// doctor: async (parent: any) => {
-	// 	// 	console.log(parent);
-	// 	// 	// return await fetchDoctor(parent.doctor);
-	// 	// }
-	// 	// patient: async (parent: GQL.ISchedule) => {
-	// 	// 	const patient: GQL.IFetchPatientOnQueryArguments = parent.patient!;
-	// 	// 	return await fetchPatient(patient);
-	// 	// },
-	// 	// services: async (parent: GQL.ISchedule) => {
-	// 	// 	return await scheduleServices(parent);
-	// 	// }
-	// }
 };

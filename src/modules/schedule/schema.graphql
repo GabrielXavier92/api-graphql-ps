@@ -1,4 +1,6 @@
 # import Doctor from "../doctor/schema.graphql"
+# import Patient from "../patient/schema.graphql"
+# import Service from "../service/schema.graphql"
 
 type Query {
 	fetchSchedule(id: ID!): Schedule
@@ -24,7 +26,9 @@ input ScheduleInput {
 
 type Schedule {
 	id: ID!
-	doctor: Doctor!
+	doctor: Doctor
+	patient: Patient
+	services: [Service]
 	name: String
 	status: ScheduleStatus
 	day: String
