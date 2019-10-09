@@ -13,7 +13,7 @@
 	"dependencies": {
 		"@gql2ts/from-schema": "^1.10.1",
 		"@graphql-modules/core": "^0.7.12",
-		"apollo-server": "^2.9.3",
+		"apollo-server": "^2.5.0-rc.0",
 		"apollo-server-express": "^2.9.3",
 		"bcryptjs": "^2.4.3",
 		"dotenv": "^8.1.0",
@@ -21,6 +21,7 @@
 		"global": "^4.4.0",
 		"graphql-import": "^0.7.1",
 		"graphql-pg": "^1.0.21",
+		"graphql-schema-typescript": "^1.3.1",
 		"graphql-tag": "^2.10.1",
 		"graphql-tools": "^4.0.5",
 		"jsonwebtoken": "^8.5.1",

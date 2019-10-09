@@ -1,6 +1,3 @@
-# import Specialty from "../specialty/schema.graphql"
-# import Service from "../service/schema.graphql"
-
 type Query {
 	fetchDoctors: [Doctor]
 	fetchDoctor(id: ID!): Doctor
@@ -30,8 +27,10 @@ type Doctor {
 	cro: Int
 	status: Boolean
 	gender: Gender
-	specialties: [Specialty]
-	services: [Service]
+}
+
+type Schedule {
+	doctor: Doctor
 }
 
 enum Gender {

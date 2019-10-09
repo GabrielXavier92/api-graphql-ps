@@ -4,6 +4,8 @@ import { fetchSpecialty } from "./functions/fetch-specialty";
 import { fetchSpecialties } from "./functions/fetch-specialties";
 import { updateSpecialty } from "./functions/update-specialty";
 import { deleteSpecialty } from "./functions/delete-specialty";
+import { doctorSpecialties } from "../doctor/functions/doctor-specialties";
+import { Doctor } from "../../entity/Doctor";
 
 export const resolvers: ResolverMap = {
 	Query: {
@@ -23,6 +25,11 @@ export const resolvers: ResolverMap = {
 		},
 		deleteSpecialty: async (_, args: GQL.IDeleteSpecialtyOnMutationArguments) => {
 			return await deleteSpecialty(args);
+		}
+	},
+	Doctor: {
+		specialties: async (parent: Doctor) => {
+			return await doctorSpecialties(parent);
 		}
 	}
 };

@@ -4,6 +4,9 @@ import { fetchServices } from "./functions/fetch-services";
 import { fetchService } from "./functions/fetch-service";
 import { updateService } from "./functions/update-service";
 import { deleteService } from "./functions/delete-service";
+import { Doctor } from "../../entity/Doctor";
+import { doctorServices } from "../doctor/functions/doctor-services";
+import { scheduleServices } from "../schedule/functions/schedule-services";
 
 export const resolvers: ResolverMap = {
 	Query: {
@@ -23,6 +26,16 @@ export const resolvers: ResolverMap = {
 		},
 		deleteService: async (_, args: GQL.IDeleteServiceOnMutationArguments) => {
 			return await deleteService(args);
+		}
+	},
+	Doctor: {
+		services: async (parent: Doctor) => {
+			return await doctorServices(parent);
+		}
+	},
+	Schedule: {
+		services: async (parent: any) => {
+			return await scheduleServices(parent);
 		}
 	}
 };

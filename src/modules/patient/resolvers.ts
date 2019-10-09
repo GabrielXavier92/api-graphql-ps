@@ -24,5 +24,13 @@ export const resolvers: ResolverMap = {
 		deletePatient: async (_, args: GQL.IDeletePatientOnMutationArguments) => {
 			return await deletePatient(args);
 		}
+	},
+	Schedule: {
+		patient: async (parent: GQL.ISchedule) => {
+			const patient: GQL.IFetchPatientOnQueryArguments = {
+				id: (parent as any).patientId!
+			};
+			return await fetchPatient(patient);
+		}
 	}
 };

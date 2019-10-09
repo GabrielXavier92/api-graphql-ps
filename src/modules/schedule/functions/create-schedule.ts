@@ -15,11 +15,11 @@ export const createSchedule = async (
 			user: {
 				id: currentUser.id
 			},
-			doctor: {
-				id: doctorId
-			},
 			patient: {
 				id: patientId
+			},
+			doctor: {
+				id: doctorId
 			},
 			name: name!,
 			status: (status! as any) as ScheduleStatus,
@@ -30,7 +30,6 @@ export const createSchedule = async (
 
 		await schedule.save();
 
-		console.log(schedule);
 		if (services) {
 			const servs = await Service.findByIds(services);
 			servs.forEach(async serv => {
@@ -44,6 +43,7 @@ export const createSchedule = async (
 
 		return schedule;
 	} catch (err) {
+		console.log(err);
 		throw new AuthenticationError(failedToCreateSchedule);
 	}
 };

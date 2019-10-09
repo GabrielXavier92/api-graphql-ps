@@ -23,6 +23,10 @@ type Patient {
 	birth: String
 }
 
+type Schedule {
+	patient: Patient
+}
+
 enum Gender {
 	MASCULINO
 	FEMININO

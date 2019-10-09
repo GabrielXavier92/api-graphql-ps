@@ -1,10 +1,7 @@
-import { doctorServices } from "./functions/doctor-services";
-import { Doctor } from "./../../entity/Doctor";
 import { createDoctor } from "./functions/create-doctor";
 import { ResolverMap } from "../../types/graphql-utils";
 import { fetchDoctors } from "./functions/fetch-doctors";
 import { fetchDoctor } from "./functions/fetch-doctor";
-import { doctorSpecialties } from "./functions/doctor-specialties";
 import { updateDoctor } from "./functions/update-doctor";
 import { deleteDoctor } from "./functions/delete-doctor";
 
@@ -28,12 +25,12 @@ export const resolvers: ResolverMap = {
 			return await deleteDoctor(args);
 		}
 	},
-	Doctor: {
-		specialties: async (parent: Doctor) => {
-			return await doctorSpecialties(parent);
-		},
-		services: async (parent: Doctor) => {
-			return await doctorServices(parent);
+	Schedule: {
+		doctor: async (parent: GQL.ISchedule) => {
+			const doctor: GQL.IFetchDoctorOnQueryArguments = {
+				id: (parent as any).doctorId!
+			};
+			return await fetchDoctor(doctor);
 		}
 	}
 };

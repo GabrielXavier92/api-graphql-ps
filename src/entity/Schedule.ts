@@ -33,10 +33,14 @@ export class Schedule extends BaseEntity {
 	user: User;
 
 	@Column("uuid", { name: "doctorId" })
+	doctorId: string;
+
 	@ManyToOne(_ => Doctor, doctor => doctor.schedules, { nullable: false })
 	doctor: Doctor;
 
 	@Column("uuid", { name: "patientId" })
+	patientId: string;
+
 	@ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
 	patient: Patient;
 

@@ -1,14 +1,16 @@
 import "dotenv/config";
 
-import { generateNamespace } from "@gql2ts/from-schema";
+// import { generateNamespace, ISchemaToInterfaceOptions } from "@gql2ts/from-schema";
 import { GraphQLSchema } from "graphql";
 import { importSchema } from "graphql-import";
 import { mergeSchemas, makeExecutableSchema } from "graphql-tools";
 
-import { writeFile, readdirSync } from "fs";
+import { readdirSync } from "fs";
 import { join } from "path";
 
-const genSchema = () => {
+import { generateTypeScriptTypes } from "graphql-schema-typescript";
+
+const genSchema = async () => {
 	// Rotina para percorrer por todas as pastas dentro de modules e mesclar os resolvers e schemas
 	const schemas: GraphQLSchema[] = [];
 
@@ -18,15 +20,12 @@ const genSchema = () => {
 	folders.forEach(folder => {
 		// const { resolvers } = require(`../modules/${folder}/resolvers`);
 		const typeDefs = importSchema(join(__dirname, `../modules/${folder}/schema.graphql`));
-
 		schemas.push(makeExecutableSchema({ typeDefs }));
 	});
-
-	return mergeSchemas({ schemas });
+	await generateTypeScriptTypes(
+		mergeSchemas({ schemas }),
+		join(__dirname, "../types/schemas.d.ts")
+	);
 };
 
-const types = generateNamespace("GQL", genSchema());
-
-writeFile(join(__dirname, "../types/schemas.d.ts"), types, err => {
-	console.error(err);
-});
+genSchema();

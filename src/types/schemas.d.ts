@@ -57,19 +57,7 @@ declare namespace GQL {
 
   interface IDoctor {
     __typename: 'Doctor';
-    id: string;
-    name: string;
-    birth: string | null;
-    cro: number | null;
-    status: boolean | null;
-    gender: Gender | null;
     specialties: Array<ISpecialty | null> | null;
-    services: Array<IService | null> | null;
-  }
-
-  const enum Gender {
-    MASCULINO = 'MASCULINO',
-    FEMININO = 'FEMININO'
   }
 
   interface ISpecialty {
@@ -80,16 +68,6 @@ declare namespace GQL {
     description: string | null;
   }
 
-  interface IService {
-    __typename: 'Service';
-    id: string;
-    code: number | null;
-    name: string | null;
-    description: string | null;
-    value: number | null;
-    status: boolean | null;
-  }
-
   interface IPatient {
     __typename: 'Patient';
     id: string;
@@ -98,24 +76,24 @@ declare namespace GQL {
     birth: string | null;
   }
 
-  interface ISchedule {
-    __typename: 'Schedule';
-    id: string;
-    doctor: IDoctor | null;
-    patient: IPatient | null;
-    services: Array<IService | null> | null;
-    name: string | null;
-    status: ScheduleStatus | null;
-    day: string | null;
-    value: number | null;
-    color: string | null;
+  const enum Gender {
+    MASCULINO = 'MASCULINO',
+    FEMININO = 'FEMININO'
   }
 
-  const enum ScheduleStatus {
-    AGENDADO = 'AGENDADO',
-    ATENDENDO = 'ATENDENDO',
-    CONCLUIDO = 'CONCLUIDO',
-    CANCELADO = 'CANCELADO'
+  interface ISchedule {
+    __typename: 'Schedule';
+    services: Array<IService | null> | null;
+  }
+
+  interface IService {
+    __typename: 'Service';
+    id: string;
+    code: number | null;
+    name: string | null;
+    description: string | null;
+    value: number | null;
+    status: boolean | null;
   }
 
   interface IMutation {
@@ -275,6 +253,13 @@ declare namespace GQL {
     value?: number | null;
     color?: string | null;
     services?: Array<string | null> | null;
+  }
+
+  const enum ScheduleStatus {
+    AGENDADO = 'AGENDADO',
+    ATENDENDO = 'ATENDENDO',
+    CONCLUIDO = 'CONCLUIDO',
+    CANCELADO = 'CANCELADO'
   }
 
   interface IServiceInput {

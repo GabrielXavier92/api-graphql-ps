@@ -26,3 +26,11 @@ type Service {
 	value: Float
 	status: Boolean
 }
+
+type Doctor {
+	services: [Service]
+}
+
+type Schedule {
+	services: [Service]
+}
