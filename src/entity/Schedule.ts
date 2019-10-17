@@ -3,75 +3,79 @@ import { User } from "./User";
 import { Patient } from "./Patient";
 
 import {
-	Entity,
-	Column,
-	PrimaryColumn,
-	ManyToOne,
-	BaseEntity,
-	CreateDateColumn,
-	UpdateDateColumn,
-	BeforeInsert,
-	OneToMany
+  Entity,
+  Column,
+  PrimaryColumn,
+  ManyToOne,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+  OneToMany
 } from "typeorm";
 
 import * as uuidv4 from "uuid/v4";
 import { ScheduleService } from "./ScheduleService";
 
 export enum ScheduleStatus {
-	AGENDADO = "AGENDADO",
-	ATENDENDO = "ATENDENDO",
-	CONCLUIDO = "CONCLUIDO",
-	CANCELADO = "CANCELADO"
+  AGENDADO = "AGENDADO",
+  ATENDENDO = "ATENDENDO",
+  CONCLUIDO = "CONCLUIDO",
+  CANCELADO = "CANCELADO"
 }
 
 @Entity("schedule")
 export class Schedule extends BaseEntity {
-	@PrimaryColumn("uuid")
-	id: string;
+  @PrimaryColumn("uuid")
+  id: string;
 
-	@ManyToOne(_ => User, user => user.schedules, { nullable: false })
-	user: User;
+  @ManyToOne(_ => User, user => user.schedules, { nullable: false })
+  user: User;
 
-	@Column("uuid", { name: "doctorId" })
-	doctorId: string;
+  @Column("uuid", { name: "doctorId" })
+  doctorId: string;
 
-	@ManyToOne(_ => Doctor, doctor => doctor.schedules, { nullable: false })
-	doctor: Doctor;
+  @ManyToOne(_ => Doctor, doctor => doctor.schedules, { nullable: false })
+  doctor: Doctor;
 
-	@Column("uuid", { name: "patientId" })
-	patientId: string;
+  @Column("uuid", { name: "patientId" })
+  patientId: string;
 
-	@ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
-	patient: Patient;
+  @ManyToOne(_ => Patient, patient => patient.schedules, { nullable: false })
+  patient: Patient;
 
-	@OneToMany(_ => ScheduleService, scheduleService => scheduleService.schedule)
-	scheduleServices: ScheduleService[];
+  @OneToMany(_ => ScheduleService, scheduleService => scheduleService.schedule)
+  scheduleServices: ScheduleService[];
 
-	@Column("varchar", { length: 255 })
-	name: string;
+  @Column("varchar", { length: 255, nullable: true })
+  name: string;
 
-	@Column({ type: "enum", enum: ScheduleStatus, default: ScheduleStatus.AGENDADO })
-	status: ScheduleStatus;
+  @Column({
+    type: "enum",
+    enum: ScheduleStatus,
+    default: ScheduleStatus.AGENDADO
+  })
+  status: ScheduleStatus;
 
-	@Column({ type: "timestamp", nullable: false })
-	day: Date;
+  @Column({ type: "timestamp", nullable: false })
+  day: Date;
 
-	@Column("float", { default: 0, nullable: true })
-	value: number;
+  @Column("float", { default: 0, nullable: true })
+  value: number;
 
-	@Column("varchar", { nullable: true })
-	color: string;
+  @Column("varchar", { nullable: true })
+  color: string;
 
-	@Column()
-	@CreateDateColumn()
-	createdAt: Date;
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
-	@Column()
-	@UpdateDateColumn()
-	updatedAt: Date;
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-	@BeforeInsert()
-	addId() {
-		this.id = uuidv4();
-	}
+  @BeforeInsert()
+  addId() {
+    this.id = uuidv4();
+  }
 }

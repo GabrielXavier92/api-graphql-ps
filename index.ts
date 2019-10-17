@@ -18,41 +18,41 @@ import { createConnection } from "./src/utils/create-connection";
 import { Request } from "express";
 
 const startServer = async () => {
-	const app = new GraphQLModule({
-		name: "app",
-		imports: [
-			authModule,
-			articlesModule,
-			doctorModule,
-			specialtyModule,
-			serviceModule,
-			scheduleModule,
-			patientModule
-		],
-		resolversComposition,
-		context(req: Request) {
-			return req;
-		}
-	});
+  const app = new GraphQLModule({
+    name: "app",
+    imports: [
+      articlesModule,
+      authModule,
+      doctorModule,
+      patientModule,
+      scheduleModule,
+      serviceModule,
+      specialtyModule
+    ],
+    resolversComposition,
+    context(req: Request) {
+      return req;
+    }
+  });
 
-	const { schema, context } = app;
+  const { schema, context } = app;
 
-	const server = new ApolloServer({
-		schema,
-		context,
-		formatError: ({ message, path, extensions }) => ({
-			message,
-			path,
-			errors: extensions!.exception!.errors,
-			code: extensions!.code
-		})
-	});
+  const server = new ApolloServer({
+    schema,
+    context,
+    formatError: ({ message, path, extensions }) => ({
+      message,
+      path,
+      errors: extensions!.exception!.errors,
+      code: extensions!.code
+    })
+  });
 
-	await createConnection();
+  await createConnection();
 
-	server.listen().then(({ url }) => {
-		console.log(`🚀  Server ready at ${url}`);
-	});
+  server.listen().then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
+  });
 };
 
 startServer();
