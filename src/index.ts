@@ -2,18 +2,18 @@ import "reflect-metadata"; // typeorm
 import "dotenv/config";
 
 import { ApolloServer } from "apollo-server";
-import { resolversComposition } from "./src/modules/resolvers-composition";
+import { resolversComposition } from "./modules/resolvers-composition";
 import { GraphQLModule } from "@graphql-modules/core";
 
-import { authModule } from "./src/modules/auth/auth-module";
-import { articlesModule } from "./src/modules/articles/articles-module";
-import { doctorModule } from "./src/modules/doctor/doctor-module";
-import { specialtyModule } from "./src/modules/specialty/specialty-module";
-import { serviceModule } from "./src/modules/service/service-module";
-import { scheduleModule } from "./src/modules/schedule/schedule-module";
-import { patientModule } from "./src/modules/patient/patient-module";
+import { authModule } from "./modules/auth/auth-module";
+import { articlesModule } from "./modules/articles/articles-module";
+import { doctorModule } from "./modules/doctor/doctor-module";
+import { specialtyModule } from "./modules/specialty/specialty-module";
+import { serviceModule } from "./modules/service/service-module";
+import { scheduleModule } from "./modules/schedule/schedule-module";
+import { patientModule } from "./modules/patient/patient-module";
 
-import { createConnection } from "./src/utils/create-connection";
+import { createConnection } from "./utils/create-connection";
 
 import { Request } from "express";
 

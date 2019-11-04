@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.ts",
 	"scripts": {
-		"start": "NODE_ENV=development nodemon --exec ts-node --files index.ts",
+		"start": "NODE_ENV=development nodemon --exec ts-node --files src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"gen-schema": "ts-node --files src/utils/create-types.ts",
 		"generate": "graphql-codegen"
