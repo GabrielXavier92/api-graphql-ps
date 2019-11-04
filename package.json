@@ -7,7 +7,13 @@
 		"start": "NODE_ENV=development nodemon --exec ts-node --files index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"gen-schema": "ts-node --files src/utils/create-types.ts",
-		"generate": "graphql-codegen"
+		"generate": "graphql-codegen",
+		"builds": [
+			{
+				"src": "index.js",
+				"use": "@now/node-server"
+			}
+		]
 	},
 	"author": "",
 	"license": "ISC",

@@ -41,6 +41,7 @@ const startServer = async () => {
 		schema,
 		context,
 		introspection: true,
+		playground: true,
 		formatError: ({ message, path, extensions }) => ({
 			message,
 			path,
