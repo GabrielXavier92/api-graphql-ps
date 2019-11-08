@@ -2,11 +2,11 @@
 	{
 		"name": "development",
 		"type": "postgres",
-		"host": "localhost",
+		"host": "postgres",
 		"port": 5432,
 		"username": "root",
 		"password": "root",
-		"database": "graphql-ts",
+		"database": "api-graphql-ps",
 		"synchronize": true,
 		"logging": true,
 		"entities": ["src/entity/**/*.ts"],
