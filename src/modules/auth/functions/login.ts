@@ -1,5 +1,5 @@
 import { User } from "../../../entity/User";
-import { AuthenticationError, ForbiddenError } from "apollo-server";
+import { AuthenticationError } from "apollo-server";
 import {
 	minLengthEmail,
 	maxLengthEmail,
@@ -41,7 +41,7 @@ export const login = async ({ email, password }: GQL.ILoginOnMutationArguments) 
 	if (!user.confirmed) throw new AuthenticationError(confirmedUser);
 
 	// Compara as senhas
-	if (!(await bcrypt.compare(password, user.password))) throw new ForbiddenError(failedToLogin);
+	if (!(await bcrypt.compare(password, user.password))) throw new AuthenticationError(failedToLogin);
 
 	const token = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_SECRET as string, {
 		expiresIn: "7days"
