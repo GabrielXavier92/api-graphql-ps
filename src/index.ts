@@ -17,7 +17,12 @@ import { createConnection } from "./utils/create-connection";
 
 import { Request } from "express";
 
+import { initiAxios } from './utils/connection';
+
 const startServer = async () => {
+
+	initiAxios();
+
 	const app = new GraphQLModule({
 		name: "app",
 		imports: [

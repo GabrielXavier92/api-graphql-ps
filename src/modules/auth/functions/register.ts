@@ -1,7 +1,10 @@
-import { User } from "../../../entity/User";
-import { ForbiddenError } from "apollo-server";
+// import { User } from "../../../entity/User";
+// import { ForbiddenError } from "apollo-server";
+
+import axios from 'axios';
+
 import {
-	duplicatedEmail,
+	// duplicatedEmail,
 	minLengthName,
 	minLengthEmail,
 	maxLengthEmail,
@@ -10,7 +13,7 @@ import {
 } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 
-import * as bcrypt from "bcryptjs";
+// import * as bcrypt from "bcryptjs";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -36,25 +39,36 @@ export const register = async ({ email, name, password }: GQL.IRegisterOnMutatio
 		formatYupError(err);
 	}
 
-	const userExists = await User.findOne({
-		where: { email },
-		select: ["id"]
-	});
-
-	if (userExists) throw new ForbiddenError(duplicatedEmail);
-
-	const hashPassword = await bcrypt.hash(password, 10);
-
-	const user = User.create({
+	await axios.post(`${process.env.AUTH0_API}users`, {
 		email,
-		name,
-		password: hashPassword
-	});
+		password,
+		name
+	}).then(data => {
+		console.log(data)
+	}).catch(err => {
+		console.error(err.response.data)
+	})
 
-	await user.save();
+
+	// const userExists = await User.findOne({
+	// 	where: { email },
+	// 	select: ["id"]
+	// });
+
+	// if (userExists) throw new ForbiddenError(duplicatedEmail);
+
+	// const hashPassword = await bcrypt.hash(password, 10);
+
+	// const user = User.create({
+	// 	email,
+	// 	name,
+	// 	password: hashPassword
+	// });
+
+	// await user.save();
 
 	// Gerar uma URL para confirmacao de email
 	// await sendEmail(email, "url");
 
-	return user;
+	return null;
 };

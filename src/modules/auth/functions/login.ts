@@ -24,6 +24,7 @@ const schema = yup.object().shape({
 		.min(5, minLengthPassword)
 		.max(255)
 });
+
 export const login = async ({ email, password }: GQL.ILoginOnMutationArguments) => {
 	try {
 		await schema.validate({ email, password }, { abortEarly: false });
