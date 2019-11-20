@@ -13,6 +13,7 @@ import { formatYupError } from "../../../utils/format-yup-error";
 import * as bcrypt from "bcryptjs";
 import * as yup from "yup";
 import * as jwt from "jsonwebtoken";
+
 const schema = yup.object().shape({
 	email: yup
 		.string()
