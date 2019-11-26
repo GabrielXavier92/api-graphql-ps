@@ -1,7 +1,7 @@
 import { ScheduleService } from "./../../../entity/ScheduleService";
 import { Service } from "./../../../entity/Service";
 import { Schedule, ScheduleStatus } from "./../../../entity/Schedule";
-import { AuthenticationError } from "apollo-server";
+import { ForbiddenError } from "apollo-server";
 import { User as UserInterface } from "./../../auth/auth-helpers";
 import { failedToCreateSchedule } from "../../../utils/messages";
 
@@ -44,6 +44,6 @@ export const createSchedule = async (
 		return schedule;
 	} catch (err) {
 		console.log(err);
-		throw new AuthenticationError(failedToCreateSchedule);
+		throw new ForbiddenError(failedToCreateSchedule);
 	}
 };

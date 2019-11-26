@@ -7,7 +7,7 @@ import { Doctor, Gender } from "./../../../entity/Doctor";
 import { minLengthName, failedToCreateDoctor } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 import * as yup from "yup";
-import { AuthenticationError } from "apollo-server";
+import { ForbiddenError } from "apollo-server";
 
 const schema = yup.object().shape({
 	name: yup.string().min(5, minLengthName)
@@ -60,6 +60,6 @@ export const createDoctor = async (
 
 		return doctor;
 	} catch (err) {
-		throw new AuthenticationError(failedToCreateDoctor);
+		throw new ForbiddenError(failedToCreateDoctor);
 	}
 };

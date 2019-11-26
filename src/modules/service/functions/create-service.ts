@@ -1,7 +1,9 @@
+import { failedToCreateService } from './../../../utils/messages';
 import { User as UserInterface } from "../../auth/auth-helpers";
 import { minLengthName, minLengthCode } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 import { Service } from "../../../entity/Service";
+import { ForbiddenError } from "apollo-server";
 
 import * as yup from "yup";
 
@@ -20,19 +22,24 @@ export const createService = async (
 		formatYupError(err);
 	}
 
-	const { code, name, description, value } = args.service;
+	try {
+		const { code, name, description, value } = args.service;
 
-	const service = Service.create({
-		name: name,
-		code: code!,
-		value: value!,
-		description: description!,
-		user: {
-			id: currentUser.id
-		}
-	});
+		const service = Service.create({
+			name: name,
+			code: code!,
+			value: value!,
+			description: description!,
+			user: {
+				id: currentUser.id
+			}
+		});
 
-	await service.save();
+		await service.save();
 
-	return service;
+		return service;
+
+	} catch (err) {
+		throw new ForbiddenError(failedToCreateService)
+	}
 };

@@ -42,12 +42,12 @@ const startServer = async () => {
 		context,
 		introspection: true,
 		playground: true,
-		formatError: ({ message, path, extensions }) => ({
-			message,
-			path,
-			errors: extensions!.exception!.errors,
-			code: extensions!.code
-		})
+		// formatError: ({ message, path, extensions }) => ({
+		// 	message,
+		// 	path,
+		// 	errors: extensions!.exception!.errors,
+		// 	code: extensions!.code
+		// })
 	});
 
 	await createConnection();

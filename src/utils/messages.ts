@@ -12,6 +12,7 @@ export const failedToCreatePatient = "Não foi possivel criar o paciente";
 export const failedToCreateSchedule = "Não foi possivel criar o agendamento";
 export const failedToFetch = "Erro ao buscar";
 export const failedToUpdate = "Erro ao atualizar";
+export const failedToDelete = "Erro ao deletar";
 
 export const invalidEmail = "Formato de email invalido";
 export const failedToLogin = "Login/Senha incorreto";

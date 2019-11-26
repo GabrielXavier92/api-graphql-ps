@@ -1,5 +1,5 @@
 import { Patient } from "./../../../entity/Patient";
-import { AuthenticationError } from "apollo-server";
+import { ForbiddenError } from "apollo-server";
 import { User as UserInterface } from "./../../auth/auth-helpers";
 
 import * as yup from "yup";
@@ -37,6 +37,6 @@ export const createPatient = async (
 
 		return patient;
 	} catch (err) {
-		throw new AuthenticationError(failedToCreatePatient);
+		throw new ForbiddenError(failedToCreatePatient);
 	}
 };

@@ -1,7 +1,9 @@
+import { failedToCreateSpecialty } from './../../../utils/messages';
 import { User as UserInterface } from "./../../auth/auth-helpers";
 import { minLengthName, minLengthCode } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 import { Specialty } from "./../../../entity/Specialty";
+import { ForbiddenError } from "apollo-server";
 
 import * as yup from "yup";
 
@@ -20,18 +22,23 @@ export const createSpecialty = async (
 		formatYupError(err);
 	}
 
-	const { code, name, description } = args.specialty;
+	try {
+		const { code, name, description } = args.specialty;
 
-	const specialty = Specialty.create({
-		code,
-		name: name!,
-		description: description!,
-		user: {
-			id: currentUser.id
-		}
-	});
+		const specialty = Specialty.create({
+			code,
+			name: name!,
+			description: description!,
+			user: {
+				id: currentUser.id
+			}
+		});
 
-	await specialty.save();
+		await specialty.save();
 
-	return specialty;
+		return specialty;
+
+	} catch (err) {
+		throw new ForbiddenError(failedToCreateSpecialty)
+	}
 };
