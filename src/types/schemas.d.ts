@@ -230,7 +230,7 @@ declare namespace GQL {
     id?: string | null;
     name: string;
     gender?: Gender | null;
-    birth?: string | null;
+    birth?: any | null;
     cro?: number | null;
     status?: boolean | null;
     specialties?: Array<string | null> | null;

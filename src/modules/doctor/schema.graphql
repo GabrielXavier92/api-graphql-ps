@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
 	fetchDoctors: [Doctor]
 	fetchDoctor(id: ID!): Doctor
@@ -13,7 +15,7 @@ input DoctorInput {
 	id: ID
 	name: String!
 	gender: Gender
-	birth: String
+	birth: DateTime
 	cro: Int
 	status: Boolean
 	specialties: [ID]
@@ -23,7 +25,7 @@ input DoctorInput {
 type Doctor {
 	id: ID!
 	name: String!
-	birth: String
+	birth: DateTime
 	cro: Int
 	status: Boolean
 	gender: Gender

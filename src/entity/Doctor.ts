@@ -54,8 +54,8 @@ export class Doctor extends BaseEntity {
 	@Column("enum", { enum: Gender, nullable: true })
 	gender: Gender;
 
-	@Column("time without time zone", { nullable: true })
-	birth: string;
+	@Column({ nullable: true, type: 'timestamptz' })
+	birth: Date;
 
 	@Column("integer", { nullable: true })
 	cro: number;
