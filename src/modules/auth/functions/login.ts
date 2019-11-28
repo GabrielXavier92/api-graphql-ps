@@ -39,7 +39,7 @@ export const login = async ({ email, password }: GQL.ILoginOnMutationArguments) 
 	if (!user) throw new AuthenticationError(failedToLogin);
 
 	// Verifica se o usuario confirmou o email
-	if (!user.confirmed) throw new AuthenticationError(confirmedUser);
+	// if (!user.confirmed) throw new AuthenticationError(confirmedUser);
 
 	// Compara as senhas
 	if (!(await bcrypt.compare(password, user.password))) throw new AuthenticationError(failedToLogin);
