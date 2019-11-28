@@ -49,7 +49,7 @@
 		"@types/node": "^12.7.7",
 		"@types/sparkpost": "^2.1.4",
 		"@types/uuid": "^3.4.5",
-		"@types/yup": "^0.26.24",
+		"@types/yup": "^0.26.24"
 	},
 	"devDependencies": {
 		"prettier": "^1.18.2"
