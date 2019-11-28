@@ -6,7 +6,7 @@ import {
 	invalidEmail,
 	minLengthPassword,
 	failedToLogin,
-	confirmedUser
+	// confirmedUser
 } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 
