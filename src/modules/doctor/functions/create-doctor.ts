@@ -24,12 +24,13 @@ export const createDoctor = async (
 	}
 
 	try {
-		const { name, gender, birth, cro, specialties, services } = args.doctor;
+		const { name, gender, birth, cro, specialties, services, status } = args.doctor;
 		const doctor = Doctor.create({
 			name,
 			gender: (gender! as any) as Gender,
 			birth: birth!,
 			cro: cro!,
+			status: status!,
 			user: { id: currentUser.id }
 		});
 
