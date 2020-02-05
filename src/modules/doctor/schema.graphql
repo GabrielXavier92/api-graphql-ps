@@ -17,7 +17,7 @@ input DoctorInput {
 	gender: Gender
 	birth: DateTime
 	cro: Int
-	status: Boolean
+	status: Status
 	specialties: [ID]
 	services: [ID]
 }
@@ -27,7 +27,7 @@ type Doctor {
 	name: String!
 	birth: DateTime
 	cro: Int
-	status: Boolean
+	status: Status
 	gender: Gender
 }
 
@@ -38,4 +38,9 @@ type Schedule {
 enum Gender {
 	MASCULINO
 	FEMININO
+}
+
+enum Status {
+	ATIVO
+	INATIVO
 }

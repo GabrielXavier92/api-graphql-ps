@@ -25,27 +25,51 @@ export enum Gender {
 	FEMININO = "FEMININO"
 }
 
+export enum Status {
+	ATIVO = "ATIVO",
+	INATIVO = "INATIVO"
+}
+
 @Entity("doctor")
 export class Doctor extends BaseEntity {
 	@PrimaryColumn("uuid")
 	id: string;
 
-	@ManyToOne(_ => User, user => user.doctors, { nullable: false })
+	@ManyToOne(
+		_ => User,
+		user => user.doctors,
+		{ nullable: false }
+	)
 	user: User;
 
-	@OneToMany(_ => Handbook, handbook => handbook.doctor)
+	@OneToMany(
+		_ => Handbook,
+		handbook => handbook.doctor
+	)
 	handbooks: Handbook[];
 
-	@OneToMany(_ => Guide, guide => guide.doctor)
+	@OneToMany(
+		_ => Guide,
+		guide => guide.doctor
+	)
 	guides: Guide[];
 
-	@OneToMany(_ => DoctorSpecialty, doctorSpecialty => doctorSpecialty.doctor)
+	@OneToMany(
+		_ => DoctorSpecialty,
+		doctorSpecialty => doctorSpecialty.doctor
+	)
 	doctorSpecialties: DoctorSpecialty[];
 
-	@OneToMany(_ => DoctorService, doctorService => doctorService.doctor)
+	@OneToMany(
+		_ => DoctorService,
+		doctorService => doctorService.doctor
+	)
 	doctorServices: DoctorService[];
 
-	@OneToMany(_ => Schedule, schedule => schedule.doctor)
+	@OneToMany(
+		_ => Schedule,
+		schedule => schedule.doctor
+	)
 	schedules: Schedule[];
 
 	@Column("varchar", { length: 255 })
@@ -54,14 +78,14 @@ export class Doctor extends BaseEntity {
 	@Column("enum", { enum: Gender, nullable: true })
 	gender: Gender;
 
-	@Column({ nullable: true, type: 'timestamptz' })
+	@Column({ nullable: true, type: "timestamptz" })
 	birth: Date;
 
 	@Column("integer", { nullable: true })
 	cro: number;
 
-	@Column("boolean", { default: true })
-	status: boolean;
+	@Column("enum", { enum: Status, nullable: true })
+	status: Status;
 
 	@Column()
 	@CreateDateColumn()

@@ -3,7 +3,7 @@ import { Service } from "./../../../entity/Service";
 import { DoctorSpecialty } from "./../../../entity/DoctorSpecialty";
 import { Specialty } from "./../../../entity/Specialty";
 import { User as UserInterface } from "./../../auth/auth-helpers";
-import { Doctor, Gender } from "./../../../entity/Doctor";
+import { Doctor, Gender, Status } from "./../../../entity/Doctor";
 import { minLengthName, failedToCreateDoctor } from "../../../utils/messages";
 import { formatYupError } from "../../../utils/format-yup-error";
 import * as yup from "yup";
@@ -30,7 +30,7 @@ export const createDoctor = async (
 			gender: (gender! as any) as Gender,
 			birth: birth!,
 			cro: cro!,
-			status: status!,
+			status: (status! as any) as Status,
 			user: { id: currentUser.id }
 		});
 

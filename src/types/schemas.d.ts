@@ -232,9 +232,14 @@ declare namespace GQL {
     gender?: Gender | null;
     birth?: any | null;
     cro?: number | null;
-    status?: boolean | null;
+    status?: Status | null;
     specialties?: Array<string | null> | null;
     services?: Array<string | null> | null;
+  }
+
+  const enum Status {
+    ATIVO = 'ATIVO',
+    INATIVO = 'INATIVO'
   }
 
   interface IPatientInput {
